@@ -9,6 +9,10 @@
 import UIKit
 
 class MatterTableViewController: UITableViewController {
+    
+    @IBOutlet weak var navLabel: UINavigationItem!
+    var matters = [Matter]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,24 +32,29 @@ class MatterTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return matters.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
+        let cellIdentifier = "matterCell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatterTableViewCell
+        
+        let matter = matters[indexPath.row]
+        
+        cell.client.text = matter.client
+        cell.desc.text = matter.desc
+        cell.time.text = String(matter.time)
+        
+        
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.
@@ -82,14 +91,22 @@ class MatterTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if(segue.identifier == "showDetail"){
+            let matterDetailViewController = segue.destinationViewController as! MatterDetailViewController
+            if let selectedMatterCell = sender as? MatterTableViewCell{
+                let indexPath = tableView.indexPathForCell(selectedMatterCell)
+                let selectedMatter = matters[indexPath!.row]
+                matterDetailViewController.matter = selectedMatter
+                
+            }
+        }
+        
     }
-    */
+ 
 
 }

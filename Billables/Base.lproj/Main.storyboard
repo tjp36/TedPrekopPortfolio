@@ -136,7 +136,7 @@
             </objects>
             <point key="canvasLocation" x="840" y="-970"/>
         </scene>
-        <!--Client Table View Controller-->
+        <!--Clients-->
         <scene sceneID="69X-uQ-au1">
             <objects>
                 <tableViewController id="uhd-lw-3s1" customClass="ClientTableViewController" customModule="Billables" customModuleProvider="target" sceneMemberID="viewController">
@@ -158,16 +158,15 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoa-cc-abI">
-                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ct7-LH-Clf">
+                                            <rect key="frame" x="0.0" y="0.0" width="66" height="59"/>
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="client" destination="65E-Yb-bbo" id="WTx-m9-XPm"/>
-                                    <outlet property="clientImage" destination="hoa-cc-abI" id="w9r-Y9-I5j"/>
-                                    <outlet property="image" destination="hoa-cc-abI" id="f8c-wO-Dqi"/>
-                                    <segue destination="322-tm-xQ2" kind="show" id="BWt-WK-gzF"/>
+                                    <outlet property="clientImage" destination="ct7-LH-Clf" id="nOd-3g-97X"/>
+                                    <segue destination="322-tm-xQ2" kind="show" identifier="showMatters" id="BWt-WK-gzF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -176,7 +175,7 @@
                             <outlet property="delegate" destination="uhd-lw-3s1" id="96e-Lg-Mm2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="xDF-4u-eFw">
+                    <navigationItem key="navigationItem" title="Clients" id="xDF-4u-eFw">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="urd-D3-tNZ">
                             <connections>
                                 <segue destination="yUa-8H-gV4" kind="popoverPresentation" identifier="showSettings" popoverAnchorBarButtonItem="urd-D3-tNZ" id="RMU-TP-Q3R">
@@ -238,7 +237,7 @@
                                     <outlet property="desc" destination="Qhl-Uf-UR6" id="U0I-Z0-Hb8"/>
                                     <outlet property="description" destination="Qhl-Uf-UR6" id="iYu-Fa-BW5"/>
                                     <outlet property="time" destination="s8F-cV-wfB" id="1Yj-I4-afe"/>
-                                    <segue destination="wX2-gO-i7D" kind="showDetail" id="xi7-2t-LXc"/>
+                                    <segue destination="wX2-gO-i7D" kind="showDetail" identifier="showDetail" id="xi7-2t-LXc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -250,6 +249,9 @@
                     <navigationItem key="navigationItem" title="Client" id="fhy-sp-GLT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="W16-wi-ckq"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="navLabel" destination="fhy-sp-GLT" id="sH7-yb-gVN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOu-AS-bFu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

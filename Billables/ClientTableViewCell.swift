@@ -13,6 +13,7 @@ class ClientTableViewCell: UITableViewCell {
     // MARK: Properties
     @IBOutlet weak var client: UILabel!
     @IBOutlet weak var clientImage: UIImageView!
+   
 
     override func awakeFromNib() {
         super.awakeFromNib()

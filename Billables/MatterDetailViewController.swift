@@ -11,6 +11,8 @@ import UIKit
 class MatterDetailViewController: UIViewController {
 
     // MARK: Properties
+    var matter: Matter?
+    
     @IBOutlet weak var clientName: UILabel!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var timerLabel: UILabel!
