@@ -22,6 +22,7 @@
 		6ADBA5671D6383BC00482BB2 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5661D6383BC00482BB2 /* ClientTableViewController.swift */; };
 		6ADBA5691D63841000482BB2 /* MatterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5681D63841000482BB2 /* MatterTableViewController.swift */; };
 		6ADBA56B1D63977400482BB2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA56A1D63977400482BB2 /* SettingsViewController.swift */; };
+		6ADBA56D1D639F1C00482BB2 /* AddClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA56C1D639F1C00482BB2 /* AddClientViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		6ADBA5661D6383BC00482BB2 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
 		6ADBA5681D63841000482BB2 /* MatterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterTableViewController.swift; sourceTree = "<group>"; };
 		6ADBA56A1D63977400482BB2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6ADBA56C1D639F1C00482BB2 /* AddClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClientViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				6A373F2C1D5C0886000F6EE2 /* AppDelegate.swift */,
 				6A373F2E1D5C0886000F6EE2 /* ViewController.swift */,
 				6A373F301D5C0886000F6EE2 /* Main.storyboard */,
+				6ADBA56C1D639F1C00482BB2 /* AddClientViewController.swift */,
 				6ADBA56A1D63977400482BB2 /* SettingsViewController.swift */,
 				6ADBA5661D6383BC00482BB2 /* ClientTableViewController.swift */,
 				6ADBA5681D63841000482BB2 /* MatterTableViewController.swift */,
@@ -236,6 +239,7 @@
 				6A373F2D1D5C0886000F6EE2 /* AppDelegate.swift in Sources */,
 				6ADBA5691D63841000482BB2 /* MatterTableViewController.swift in Sources */,
 				6ADBA5671D6383BC00482BB2 /* ClientTableViewController.swift in Sources */,
+				6ADBA56D1D639F1C00482BB2 /* AddClientViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
