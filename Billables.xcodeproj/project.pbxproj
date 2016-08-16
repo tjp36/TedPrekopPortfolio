@@ -16,6 +16,12 @@
 		6A373F341D5C0886000F6EE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A373F331D5C0886000F6EE2 /* Assets.xcassets */; };
 		6A373F371D5C0886000F6EE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A373F351D5C0886000F6EE2 /* LaunchScreen.storyboard */; };
 		6A373F421D5C0886000F6EE2 /* BillablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A373F411D5C0886000F6EE2 /* BillablesTests.swift */; };
+		6ADBA5611D63817000482BB2 /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5601D63817000482BB2 /* ClientTableViewCell.swift */; };
+		6ADBA5631D63818B00482BB2 /* MatterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5621D63818B00482BB2 /* MatterTableViewCell.swift */; };
+		6ADBA5651D6382FA00482BB2 /* MatterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5641D6382FA00482BB2 /* MatterDetailViewController.swift */; };
+		6ADBA5671D6383BC00482BB2 /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5661D6383BC00482BB2 /* ClientTableViewController.swift */; };
+		6ADBA5691D63841000482BB2 /* MatterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5681D63841000482BB2 /* MatterTableViewController.swift */; };
+		6ADBA56B1D63977400482BB2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA56A1D63977400482BB2 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +48,12 @@
 		6A373F3D1D5C0886000F6EE2 /* BillablesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillablesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A373F411D5C0886000F6EE2 /* BillablesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillablesTests.swift; sourceTree = "<group>"; };
 		6A373F431D5C0886000F6EE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6ADBA5601D63817000482BB2 /* ClientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
+		6ADBA5621D63818B00482BB2 /* MatterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterTableViewCell.swift; sourceTree = "<group>"; };
+		6ADBA5641D6382FA00482BB2 /* MatterDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterDetailViewController.swift; sourceTree = "<group>"; };
+		6ADBA5661D6383BC00482BB2 /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
+		6ADBA5681D63841000482BB2 /* MatterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterTableViewController.swift; sourceTree = "<group>"; };
+		6ADBA56A1D63977400482BB2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +98,12 @@
 				6A373F2C1D5C0886000F6EE2 /* AppDelegate.swift */,
 				6A373F2E1D5C0886000F6EE2 /* ViewController.swift */,
 				6A373F301D5C0886000F6EE2 /* Main.storyboard */,
+				6ADBA56A1D63977400482BB2 /* SettingsViewController.swift */,
+				6ADBA5661D6383BC00482BB2 /* ClientTableViewController.swift */,
+				6ADBA5681D63841000482BB2 /* MatterTableViewController.swift */,
+				6ADBA5601D63817000482BB2 /* ClientTableViewCell.swift */,
+				6ADBA5621D63818B00482BB2 /* MatterTableViewCell.swift */,
+				6ADBA5641D6382FA00482BB2 /* MatterDetailViewController.swift */,
 				6A373F331D5C0886000F6EE2 /* Assets.xcassets */,
 				6A373F351D5C0886000F6EE2 /* LaunchScreen.storyboard */,
 				6A373F381D5C0886000F6EE2 /* Info.plist */,
@@ -155,6 +173,7 @@
 				TargetAttributes = {
 					6A373F281D5C0886000F6EE2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 5278499SM8;
 					};
 					6A373F3C1D5C0886000F6EE2 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -208,9 +227,15 @@
 			files = (
 				6A373F2F1D5C0886000F6EE2 /* ViewController.swift in Sources */,
 				6A2744D11D60D94600648092 /* Matter.swift in Sources */,
+				6ADBA56B1D63977400482BB2 /* SettingsViewController.swift in Sources */,
+				6ADBA5611D63817000482BB2 /* ClientTableViewCell.swift in Sources */,
 				6A2744D31D60DB0900648092 /* Client.swift in Sources */,
+				6ADBA5651D6382FA00482BB2 /* MatterDetailViewController.swift in Sources */,
+				6ADBA5631D63818B00482BB2 /* MatterTableViewCell.swift in Sources */,
 				6A2744D51D60E51E00648092 /* User.swift in Sources */,
 				6A373F2D1D5C0886000F6EE2 /* AppDelegate.swift in Sources */,
+				6ADBA5691D63841000482BB2 /* MatterTableViewController.swift in Sources */,
+				6ADBA5671D6383BC00482BB2 /* ClientTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,10 +366,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Billables/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uchicago.tjp36.Billables;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -352,10 +380,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Billables/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uchicago.tjp36.Billables;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
