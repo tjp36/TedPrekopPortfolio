@@ -105,6 +105,24 @@ class MatterTableViewController: UITableViewController {
                 
             }
         }
+        else if segue.identifier == "addMatter" {
+            print("Adding new matter.")
+        }
+        
+    }
+    
+    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? MatterDetailViewController, matter = sourceViewController.matter{
+            if let selectedIndexPath = tableView.indexPathForSelectedRow{
+                matters[selectedIndexPath.row] = matter
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+            }
+            else{
+                let newIndexPath = NSIndexPath(forRow: matters.count, inSection: 0)
+                matters.append(matter)
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+            }
+        }
         
     }
  
