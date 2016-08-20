@@ -114,16 +114,25 @@ class MatterTableViewController: UITableViewController {
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? MatterDetailViewController, matter = sourceViewController.matter{
             if let selectedIndexPath = tableView.indexPathForSelectedRow{
+                //Update an exsting matter
                 matters[selectedIndexPath.row] = matter
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             }
             else{
+                //Add a new matter
                 let newIndexPath = NSIndexPath(forRow: matters.count, inSection: 0)
                 matters.append(matter)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             }
         }
-        
+        saveMatters()
+    }
+    
+    func saveMatters(){
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(matters, toFile: Matter.ArchiveURL.path!)
+        if !isSuccessfulSave{
+            print("Failed to save matter")
+        }
     }
  
 

@@ -12,8 +12,9 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
 
     // MARK: Properties
     var matter: Matter?
-    var counter: Int?
-    var timer = NSTimer()
+    var counter: Int = 0
+    
+   
     
     @IBOutlet weak var clientName: UILabel!
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -23,7 +24,10 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        counter = 0;
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appEnteredBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        counter = TimerSingleton.sharedInstance.counter
+        timerLabel.text = "\(counter)"
+        
         descriptionTextField.delegate = self
         
         if let matter = matter{
@@ -32,6 +36,10 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         }
 
       
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,18 +98,17 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     // MARK: Actions
     @IBAction func startTimer(sender: AnyObject) {
           
-          timer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        TimerSingleton.sharedInstance.start()
+            
+        
     }
     
-    func timerAction(){
-        counter += 1
-        timerLabel.text = "\(counter)"
-    }
     
     @IBAction func stopTimer(sender: AnyObject) {
         let decTime = (Double) (counter / 60).roundToPlaces(1)
+        TimerSingleton.sharedInstance.stop()
+        
         timerLabelDecimal.text = "\(decTime)"
-        timer.invalidate()
     }
     
     @IBAction func sendEmail(sender: AnyObject) {
@@ -120,6 +127,9 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         
     }
     
+    func appEnteredBackground(notification:NSNotification) {
+        TimerSingleton.sharedInstance.enteredBackground()
+    }
 }
 
 extension Double {

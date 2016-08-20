@@ -131,6 +131,24 @@ class ClientTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func unwindToClientList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? AddClientViewController, client = sourceViewController.client {
+//            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+//                /// Update an existing meal.
+//                clients[selectedIndexPath.row] = client
+//                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+//            }
+            //else {
+                /// Add a new meal.
+                let newIndexPath = NSIndexPath(forRow: clients.count, inSection: 0)
+                clients.append(client)
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+           // }
+            /// Save the meals.
+            saveClients()
+        }
+    }
+    
     // MARK: NSCoding
     func saveClients(){
         /// Code to save meals so that same meals are there when we restart app
