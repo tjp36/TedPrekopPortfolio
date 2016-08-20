@@ -11,6 +11,12 @@ import Foundation
 class User{
     static let sharedInstance = User()
     
+    var firstName: String?
+    var lastName: String?
+    var email: String?
+    var phoneNumber: String?
+    var rate: Double?
+    
     private init(){}
     
 }

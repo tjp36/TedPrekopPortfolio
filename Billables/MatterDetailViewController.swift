@@ -12,6 +12,8 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
 
     // MARK: Properties
     var matter: Matter?
+    var counter: Int?
+    var timer = NSTimer()
     
     @IBOutlet weak var clientName: UILabel!
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -21,7 +23,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        counter = 0;
         descriptionTextField.delegate = self
         
         if let matter = matter{
@@ -87,9 +89,19 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
 
     // MARK: Actions
     @IBAction func startTimer(sender: AnyObject) {
+          
+          timer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+    }
+    
+    func timerAction(){
+        counter += 1
+        timerLabel.text = "\(counter)"
     }
     
     @IBAction func stopTimer(sender: AnyObject) {
+        let decTime = (Double) (counter / 60).roundToPlaces(1)
+        timerLabelDecimal.text = "\(decTime)"
+        timer.invalidate()
     }
     
     @IBAction func sendEmail(sender: AnyObject) {
@@ -108,6 +120,12 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         
     }
     
-    
-    
+}
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func roundToPlaces(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return round(self * divisor) / divisor
+    }
 }
