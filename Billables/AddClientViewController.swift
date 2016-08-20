@@ -13,8 +13,9 @@ class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePic
     // MARK: Properties
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var clientImage: UIImageView!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+   
+
     
     var client: Client?
     
@@ -86,28 +87,34 @@ class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePic
             let matters = [Matter]()
             
             
-            /// Set the meal to be passed to MealTableViewController after the unwind segue.
+            /// Set the client to be passed to ClientTableViewController after the unwind segue.
             client = Client(name: name, photo: photo, matters: matters)
         }
     }
  
     // MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
-        /// Hide the keyboard.
+        // Hide the keyboard.
         nameField.resignFirstResponder()
         
-        print("Tapped")
-        /// UIImagePickerController is a view controller that lets a user pick media from their photo library.
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library.
         let imagePickerController = UIImagePickerController()
         
-        /// Only allow photos to be picked, not taken.
+        // Only allow photos to be picked, not taken.
         imagePickerController.sourceType = .PhotoLibrary
         
-        /// Make sure ViewController is notified when the user picks an image.
+        // Make sure ViewController is notified when the user picks an image.
         imagePickerController.delegate = self
         
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
+    
+    
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     
     

@@ -185,7 +185,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5lJ-9W-5oO">
                             <connections>
-                                <segue destination="ppz-ni-BvI" kind="popoverPresentation" popoverAnchorBarButtonItem="5lJ-9W-5oO" id="eGM-L9-Hjt">
+                                <segue destination="3iE-fK-Rhn" kind="popoverPresentation" popoverAnchorBarButtonItem="5lJ-9W-5oO" id="eGM-L9-Hjt">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -309,7 +309,7 @@
             </objects>
             <point key="canvasLocation" x="220" y="423"/>
         </scene>
-        <!--Add Client View Controller-->
+        <!--Add Client-->
         <scene sceneID="fOE-LF-hXz">
             <objects>
                 <viewController id="ppz-ni-BvI" customClass="AddClientViewController" customModule="Billables" customModuleProvider="target" sceneMemberID="viewController">
@@ -321,23 +321,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Client" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUK-W4-tjf">
-                                <rect key="frame" x="241" y="28" width="80" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KY-xJ-jYv">
-                                <rect key="frame" x="203" y="502" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <segue destination="Lun-sk-F8H" kind="unwind" unwindAction="unwindToClientList:" id="la5-36-QeF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dD-SY-ZuY">
-                                <rect key="frame" x="341" y="502" width="48" height="30"/>
-                                <state key="normal" title="Cancel"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Client Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LN-M9-Fby">
                                 <rect key="frame" x="47" y="91" width="99" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -349,32 +332,44 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="aKo-nd-G4h">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="aKo-nd-G4h">
                                 <rect key="frame" x="64" y="170" width="260" height="259"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Okn-On-7ea" appends="YES" id="AbN-cA-Xjq"/>
+                                    <outletCollection property="gestureRecognizers" destination="xQU-S6-ksg" appends="YES" id="UY3-np-8se"/>
                                 </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Client" id="knb-50-VhP">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="dbg-dV-UrU">
+                            <connections>
+                                <action selector="cancel:" destination="ppz-ni-BvI" id="bag-Mr-byS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NTv-gh-vUl">
+                            <connections>
+                                <segue destination="5NG-YE-Zuq" kind="unwind" unwindAction="unwindToClientList:" id="8g5-Ix-BHk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="cancelButton" destination="5dD-SY-ZuY" id="IIP-lD-c9E"/>
                         <outlet property="clientImage" destination="aKo-nd-G4h" id="5BV-Xb-tgc"/>
                         <outlet property="nameField" destination="uNS-lL-IcP" id="81N-Zd-bqK"/>
-                        <outlet property="saveButton" destination="5KY-xJ-jYv" id="3py-qQ-xM2"/>
+                        <outlet property="saveButton" destination="NTv-gh-vUl" id="zFT-H7-54y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBu-EP-Pla" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Lun-sk-F8H" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="Okn-On-7ea">
+                <exit id="5NG-YE-Zuq" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="xQU-S6-ksg">
                     <connections>
-                        <action selector="selectImageFromPhotoLibrary:" destination="ppz-ni-BvI" id="37n-as-Rs9"/>
+                        <action selector="selectImageFromPhotoLibrary:" destination="ppz-ni-BvI" id="t6l-Db-oft"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1652" y="-1080"/>
+            <point key="canvasLocation" x="2464" y="-1080"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uTY-Xq-nDj">
@@ -492,6 +487,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBa-dl-yqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3176" y="442"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ujz-dg-U6D">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3iE-fK-Rhn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kZ9-or-MJe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ppz-ni-BvI" kind="relationship" relationship="rootViewController" id="96P-Gz-tF3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GGS-T7-zpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1652" y="-1080"/>
         </scene>
     </scenes>
     <resources>

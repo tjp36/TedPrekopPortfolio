@@ -120,7 +120,7 @@ class ClientTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "showMatters"){
-            let matterTableViewController = segue.destinationViewController as! MatterTableViewController
+            let matterTableViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterTableViewController
             if let selectedClientCell = sender as? MatterTableViewCell{
                 let indexPath = tableView.indexPathForCell(selectedClientCell)
                 let selectedClient = clients[indexPath!.row]
