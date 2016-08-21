@@ -120,12 +120,17 @@ class ClientTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "showMatters"){
+            print("does this get called")
             let matterTableViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterTableViewController
+            print("does this get called")
             if let selectedClientCell = sender as? MatterTableViewCell{
+                print(selectedClientCell)
                 let indexPath = tableView.indexPathForCell(selectedClientCell)
                 let selectedClient = clients[indexPath!.row]
                 
                 matterTableViewController.navLabel.title = selectedClient.name
+                print(selectedClient.name)
+                print("does this get called")
                 matterTableViewController.matters = selectedClient.matters
             }
         }

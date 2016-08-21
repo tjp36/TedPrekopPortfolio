@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MatterTableViewController: UITableViewController {
+class MatterTableViewController: UITableViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var navLabel: UINavigationItem!
     var matters = [Matter]()
@@ -91,6 +91,11 @@ class MatterTableViewController: UITableViewController {
     }
     */
 
+    // MARK: - Action
+    @IBAction func back(sender: UIBarButtonItem) {
+            dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     // MARK: - Navigation
 
