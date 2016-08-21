@@ -236,7 +236,6 @@
                                 <connections>
                                     <outlet property="client" destination="COf-fx-C3N" id="uFe-YX-n3q"/>
                                     <outlet property="desc" destination="Qhl-Uf-UR6" id="U0I-Z0-Hb8"/>
-                                    <outlet property="description" destination="Qhl-Uf-UR6" id="iYu-Fa-BW5"/>
                                     <outlet property="time" destination="s8F-cV-wfB" id="1Yj-I4-afe"/>
                                     <segue destination="wX2-gO-i7D" kind="show" identifier="showDetail" id="9FN-GJ-P0g"/>
                                 </connections>

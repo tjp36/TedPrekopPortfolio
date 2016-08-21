@@ -16,12 +16,15 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        if let savedMatters = loadMatters() {
+            matters += savedMatters
+        }
+        else {
+            /// Load the sample data.
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -138,6 +141,11 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         if !isSuccessfulSave{
             print("Failed to save matter")
         }
+    }
+    
+    ///Code to load the meals when we start up app
+    func loadMatters() -> [Matter]? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Matter.ArchiveURL.path!) as? [Matter]
     }
  
 

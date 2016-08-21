@@ -89,9 +89,9 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         if(saveButton === sender){
             let client = "test"
             let desc = descriptionTextField.text ?? ""
-            let time = 1.0
-            let price = 100.00
-            matter = Matter(client: client, desc: desc, time: time, price: price)
+            let time = Double(timerLabelDecimal.text!)
+            let price = (100.00 * time!).roundToPlaces(2)
+            matter = Matter(client: client, desc: desc, time: time!, price: price)
         }
         
     
@@ -101,16 +101,20 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     @IBAction func startTimer(sender: AnyObject) {
           
         TimerSingleton.sharedInstance.start()
-            
+        saveButton.enabled = false
         
     }
     
     
     @IBAction func stopTimer(sender: AnyObject) {
-        let decTime = (Double) (counter / 60).roundToPlaces(1)
+        let test = Double(TimerSingleton.sharedInstance.counter + 12)
+        print(test)
+        let decTime = (Double) (   test / 60).roundToPlaces(1)
+        print(decTime)
         TimerSingleton.sharedInstance.stop()
         
         timerLabelDecimal.text = "\(decTime)"
+        saveButton.enabled = true
     }
     
     @IBAction func sendEmail(sender: AnyObject) {
