@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MatterDetailViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // MARK: Properties
@@ -29,6 +30,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         timerLabel.text = "\(counter)"
         
         descriptionTextField.delegate = self
+        TimerSingleton.sharedInstance.delegate = self
         
         if let matter = matter{
             navigationItem.title = matter.client
@@ -137,5 +139,12 @@ extension Double {
     func roundToPlaces(places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return round(self * divisor) / divisor
+    }
+}
+
+extension MatterDetailViewController: TimerLabelDelegate{
+    func updateLabel(counter: Int) {
+        print(counter)
+        timerLabel.text = String(counter)
     }
 }

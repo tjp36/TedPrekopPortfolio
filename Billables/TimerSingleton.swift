@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol TimerLabelDelegate: class{
+    func updateLabel(counter: Int) -> Void
+}
+
 class TimerSingleton{
     static let sharedInstance = TimerSingleton()
     
@@ -15,7 +19,10 @@ class TimerSingleton{
     var endTime: NSDate?
     var enteredBackgroundTime: NSDate?
     var timer: NSTimer?
-    var counter: Int = 0
+    weak var delegate: TimerLabelDelegate?
+   
+    var counter: Int = 0 
+        
     var isTimerRunning: Bool = false
     
     private init(){}
@@ -27,10 +34,13 @@ class TimerSingleton{
         defaults.setObject(startTime, forKey: "StartDate")
         
         timer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        print("Starting")
     }
     
     @objc func timerAction(){
+        print(counter)
         counter += 1
+        self.delegate?.updateLabel(counter)
     }
     
     func stop(){
@@ -53,3 +63,4 @@ class TimerSingleton{
     }
     
 }
+
