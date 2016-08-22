@@ -13,21 +13,33 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
 
     // MARK: Properties
     var matter: Matter?
-    var counter: Int = 0
+    var counterHour: Int = 0
+    var counterMinute: Int = 0
+    var counterSecond: Int = 0
+    var clientName: String?
+    var totalTime: Double = 0.0
     
    
     
-    @IBOutlet weak var clientName: UILabel!
+   
     @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var navLabel: UINavigationItem!
+
+    @IBOutlet weak var timerLabelHour: UILabel!
+    @IBOutlet weak var timerLabelMinute: UILabel!
+    @IBOutlet weak var timerLabelSecond: UILabel!
     @IBOutlet weak var timerLabelDecimal: UILabel!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navLabel.title = clientName
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appEnteredBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        counter = TimerSingleton.sharedInstance.counter
-        timerLabel.text = "\(counter)"
+       
+        timerLabelHour.text = "\(counterHour):"
+        timerLabelMinute.text = "\(counterMinute):"
+        timerLabelSecond.text = "\(counterSecond)"
+        
         
         descriptionTextField.delegate = self
         TimerSingleton.sharedInstance.delegate = self
@@ -87,11 +99,11 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(saveButton === sender){
-            let client = "test"
+            let client = clientName
             let desc = descriptionTextField.text ?? ""
-            let time = Double(timerLabelDecimal.text!)
-            let price = (100.00 * time!).roundToPlaces(2)
-            matter = Matter(client: client, desc: desc, time: time!, price: price)
+            let time = totalTime
+            let price = (100.00 * time).roundToPlaces(2)
+            matter = Matter(client: client!, desc: desc, time: time, price: price)
         }
         
     
@@ -107,13 +119,14 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     
     @IBAction func stopTimer(sender: AnyObject) {
-        let test = Double(TimerSingleton.sharedInstance.counter + 12)
-        print(test)
-        let decTime = (Double) (   test / 60).roundToPlaces(1)
-        print(decTime)
+        let hours =  Double(counterHour)
+        let minutes = Double(counterMinute)
+        totalTime = (hours + (minutes / 60)).roundToPlaces(1)
+       
+        print(totalTime)
         TimerSingleton.sharedInstance.stop()
         
-        timerLabelDecimal.text = "\(decTime)"
+        timerLabelDecimal.text = "\(totalTime) hours"
         saveButton.enabled = true
     }
     
@@ -167,7 +180,21 @@ extension Double {
 
 extension MatterDetailViewController: TimerLabelDelegate{
     func updateLabel(counter: Int) {
-        print(counter)
-        timerLabel.text = String(counter)
+        var counter1 = counter
+        print(counter1)
+        if(counter1 == 60){
+            counter1 = 0
+            counterMinute += 1
+            counterSecond = 0
+            timerLabelMinute.text = "\(counterMinute):"
+            timerLabelSecond.text = "\(counterSecond)"
+        }
+        if(counterMinute == 60){
+            counterMinute = 0
+            timerLabelMinute.text = "\(counterMinute):"
+            counterHour += 1
+            timerLabelHour.text = "\(counterHour):"
+        }
+        timerLabelSecond.text = "\(counter1)"
     }
 }

@@ -33,7 +33,7 @@ class TimerSingleton{
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(startTime, forKey: "StartDate")
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         print("Starting")
     }
     
@@ -41,6 +41,9 @@ class TimerSingleton{
         print(counter)
         counter += 1
         self.delegate?.updateLabel(counter)
+        if(counter == 60){
+            counter = 0
+        }
     }
     
     func stop(){

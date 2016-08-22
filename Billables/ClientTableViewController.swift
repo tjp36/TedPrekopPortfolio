@@ -18,7 +18,7 @@ class ClientTableViewController: UITableViewController {
 
         /// Load any saved meals, otherwise load sample data.
         if let savedClients = loadClients() {
-            clients += savedClients
+            clients = savedClients
         }
         else {
             /// Load the sample data.
@@ -130,8 +130,10 @@ class ClientTableViewController: UITableViewController {
                 
                 matterTableViewController.navLabel.title = selectedClient.name
                 print(selectedClient.name)
+                matterTableViewController.clientName = selectedClient.name
                 
-                matterTableViewController.matters = selectedClient.matters
+        
+                matterTableViewController.client = selectedClient
             }
             
         }

@@ -11,14 +11,16 @@ import UIKit
 class MatterTableViewController: UITableViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var navLabel: UINavigationItem!
-    var matters = [Matter]()
+    //var matters = [Matter]()
+    var clientName: String?
+    var client: Client?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let savedMatters = loadMatters() {
-            matters += savedMatters
+            client!.matters = savedMatters
         }
         else {
             /// Load the sample data.
@@ -39,7 +41,7 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matters.count
+        return client!.matters.count
     }
 
     
@@ -47,11 +49,11 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         let cellIdentifier = "matterCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatterTableViewCell
         
-        let matter = matters[indexPath.row]
+        let matter = client?.matters[indexPath.row]
         
-        cell.client.text = matter.client
-        cell.desc.text = matter.desc
-        cell.time.text = String(matter.time)
+        cell.client.text = matter!.client
+        cell.desc.text = matter!.desc
+        cell.time.text = String(matter!.time)
         
         
 
@@ -108,13 +110,15 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
             let matterDetailViewController = segue.destinationViewController as! MatterDetailViewController
             if let selectedMatterCell = sender as? MatterTableViewCell{
                 let indexPath = tableView.indexPathForCell(selectedMatterCell)
-                let selectedMatter = matters[indexPath!.row]
+                let selectedMatter = client!.matters[indexPath!.row]
                 matterDetailViewController.matter = selectedMatter
                 
             }
         }
         else if segue.identifier == "addMatter" {
             print("Adding new matter.")
+            let matterDetailViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterDetailViewController
+            matterDetailViewController.clientName = self.clientName
         }
         
     }
@@ -123,13 +127,13 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         if let sourceViewController = sender.sourceViewController as? MatterDetailViewController, matter = sourceViewController.matter{
             if let selectedIndexPath = tableView.indexPathForSelectedRow{
                 //Update an exsting matter
-                matters[selectedIndexPath.row] = matter
+                client!.matters[selectedIndexPath.row] = matter
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             }
             else{
                 //Add a new matter
-                let newIndexPath = NSIndexPath(forRow: matters.count, inSection: 0)
-                matters.append(matter)
+                let newIndexPath = NSIndexPath(forRow: client!.matters.count, inSection: 0)
+                client!.matters.append(matter)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             }
         }
@@ -137,7 +141,7 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
     }
     
     func saveMatters(){
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(matters, toFile: Matter.ArchiveURL.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(client!.matters, toFile: Matter.ArchiveURL.path! + "\(clientName)")
         if !isSuccessfulSave{
             print("Failed to save matter")
         }
@@ -145,7 +149,7 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
     
     ///Code to load the meals when we start up app
     func loadMatters() -> [Matter]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Matter.ArchiveURL.path!) as? [Matter]
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Matter.ArchiveURL.path! + "\(clientName)") as? [Matter]
     }
  
 
