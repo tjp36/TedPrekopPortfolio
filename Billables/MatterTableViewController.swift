@@ -53,9 +53,9 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         
         cell.client.text = matter!.client
         cell.desc.text = matter!.desc
-        cell.time.text = String(matter!.time)
+        cell.time.text = "\(matter!.time!.roundToPlaces(1)) hours"
         
-        
+        print(matter!.time)
 
         return cell
     }

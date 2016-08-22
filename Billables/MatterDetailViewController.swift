@@ -35,6 +35,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         super.viewDidLoad()
         navLabel.title = clientName
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appEnteredBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appReturnedFromBackground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
        
         timerLabelHour.text = "\(counterHour):"
         timerLabelMinute.text = "\(counterMinute):"
@@ -48,8 +49,15 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             navigationItem.title = matter.client
             descriptionTextField.text = matter.desc
         }
+        
+        
+      
 
       
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        print("when does this get called")
     }
     
     deinit {
@@ -70,7 +78,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     func textFieldDidBeginEditing(textField: UITextField) {
         /// Disable the Save button while editing.
-        saveButton.enabled = false
+        //saveButton.enabled = false
     }
     
 //    func checkValidMealName() {
@@ -135,10 +143,11 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients(["theodore.prekop@gmail.com"])
-            mail.setMessageBody("Client:  \(matter?.client)\n" +
-                                "Description:  \(matter?.desc)\n" +
-                                "Time:  \(matter!.time)" +
-                                "Price:  \(matter?.price)", isHTML: false)
+            mail.setSubject("Bill for client:  \(matter!.client!)")
+            mail.setMessageBody("Client:  \(matter!.client!)\n" +
+                                "Description:  \(matter!.desc!)\n" +
+                                "Time:  \(matter!.time!)\n" +
+                                "Price:  \(matter!.price!)", isHTML: false)
             
             presentViewController(mail, animated: true, completion: nil)
         } else {
@@ -167,6 +176,42 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         TimerSingleton.sharedInstance.enteredBackground()
     }
     
+    func appReturnedFromBackground(notification:NSNotification){
+        print("back from lock")
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let now = defaults.objectForKey("StartDate") as! NSDate
+        
+        let currentTime = -1 * Int(now.timeIntervalSinceNow)
+        print(currentTime)
+        
+        counterHour = currentTime / 3600
+        counterMinute = currentTime / 60
+        while(counterMinute > 60){
+            counterMinute -= 60
+            if(counterMinute < 0){
+                counterMinute += 60
+            }
+        }
+        while(counterSecond >= 60){
+            counterSecond -= 60
+            if(counterSecond < 0){
+                counterSecond += 60
+            }
+        }
+        
+        print("Counter is \(counterSecond)")
+        
+        timerLabelHour.text = "\(counterHour):"
+        timerLabelMinute.text = "\(counterMinute):"
+        timerLabelSecond.text = "\(counterSecond)"
+        
+        TimerSingleton.sharedInstance.returnedFromBackground()
+    }
+
+    
+    
+
     
 }
 
@@ -181,7 +226,7 @@ extension Double {
 extension MatterDetailViewController: TimerLabelDelegate{
     func updateLabel(counter: Int) {
         var counter1 = counter
-        print(counter1)
+        //print(counter1)
         if(counter1 == 60){
             counter1 = 0
             counterMinute += 1
