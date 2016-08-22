@@ -444,10 +444,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="S2H-gH-Hmb">
-                                <rect key="frame" x="40" y="222" width="266" height="180"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OYy-g1-KJy">
-                                        <rect key="frame" x="26" y="0.0" width="214" height="21"/>
+                                        <rect key="frame" x="193" y="0.0" width="214" height="21"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2C6-LF-03X">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="21"/>
@@ -476,7 +476,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="200" translatesAutoresizingMaskIntoConstraints="NO" id="16N-De-tjI">
-                                        <rect key="frame" x="0.0" y="33" width="266" height="30"/>
+                                        <rect key="frame" x="167" y="33" width="266" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmB-Y5-pBC">
                                                 <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
@@ -495,7 +495,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eYD-Oc-PPZ">
-                                        <rect key="frame" x="49" y="75" width="168" height="105"/>
+                                        <rect key="frame" x="216" y="75" width="168" height="412"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time (Decimal):  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPj-A6-jt7">
                                                 <rect key="frame" x="20" y="0.0" width="129" height="21"/>
@@ -503,13 +503,13 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Description Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3S-4a-36I">
-                                                <rect key="frame" x="0.0" y="33" width="168" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Description Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3S-4a-36I">
+                                                <rect key="frame" x="0.0" y="33" width="168" height="337"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJn-3B-xsD">
-                                                <rect key="frame" x="46" y="75" width="76" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJn-3B-xsD">
+                                                <rect key="frame" x="46" y="382" width="76" height="30"/>
                                                 <state key="normal" title="Send Email"/>
                                                 <connections>
                                                     <action selector="sendEmail:" destination="wX2-gO-i7D" eventType="touchUpInside" id="51r-Qu-G5T"/>
@@ -522,8 +522,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="S2H-gH-Hmb" firstAttribute="leading" secondItem="3ko-Yj-Seb" secondAttribute="leadingMargin" constant="20" id="GGg-6W-G2U"/>
-                            <constraint firstItem="S2H-gH-Hmb" firstAttribute="top" secondItem="eop-5o-8Mj" secondAttribute="bottom" constant="158" id="JZt-W8-w5Y"/>
+                            <constraint firstItem="S2H-gH-Hmb" firstAttribute="leading" secondItem="3ko-Yj-Seb" secondAttribute="leading" id="6om-LR-1Te"/>
+                            <constraint firstItem="S2H-gH-Hmb" firstAttribute="top" secondItem="eop-5o-8Mj" secondAttribute="bottom" id="GTe-bW-xYA"/>
+                            <constraint firstAttribute="trailing" secondItem="S2H-gH-Hmb" secondAttribute="trailing" id="oeF-bL-TpR"/>
+                            <constraint firstItem="SUg-Lk-dtb" firstAttribute="top" secondItem="S2H-gH-Hmb" secondAttribute="bottom" id="yy2-Tp-9nF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Matter" id="q5A-Gh-49m">
