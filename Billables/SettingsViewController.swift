@@ -21,7 +21,13 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let savedSettings = loadSettings(){
+            firstName.text = savedSettings.firstName
+            lastName.text = savedSettings.lastName
+            email.text = savedSettings.email
+            phoneNumber.text = savedSettings.phoneNumber
+            billableRate.text = String(savedSettings.rate)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,8 +48,30 @@ class SettingsViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func saveSettings(sender: AnyObject) {
+        
+        User.sharedInstance.firstName = firstName.text
+        User.sharedInstance.lastName = lastName.text
+        User.sharedInstance.email = email.text
+        User.sharedInstance.phoneNumber = phoneNumber.text
+        User.sharedInstance.rate = Double(billableRate.text!)
+        saveSettings1()
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // MARK: NSCoding
+    func saveSettings1(){
+        /// Code to save meals so that same meals are there when we restart app
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject( User.sharedInstance  , toFile: User.ArchiveURL.path!)
+        if !isSuccessfulSave {
+            print("Failed to save settings...")
+        }
+    }
+    
+    ///Code to load the meals when we start up app
+    func loadSettings() -> User? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(User.ArchiveURL.path!) as? User
+    }
+
     
 
 }

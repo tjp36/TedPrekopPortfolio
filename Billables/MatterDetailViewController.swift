@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-
-class MatterDetailViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate {
+class MatterDetailViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
 
     // MARK: Properties
     var matter: Matter?
@@ -118,6 +118,23 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     }
     
     @IBAction func sendEmail(sender: AnyObject) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["theodore.prekop@gmail.com"])
+            mail.setMessageBody("Client:  \(matter?.client)\n" +
+                                "Description:  \(matter?.desc)\n" +
+                                "Time:  \(matter!.time)" +
+                                "Price:  \(matter?.price)", isHTML: false)
+            
+            presentViewController(mail, animated: true, completion: nil)
+        } else {
+            print("send email not available")
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func cancel(sender: AnyObject) {
@@ -136,6 +153,8 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     func appEnteredBackground(notification:NSNotification) {
         TimerSingleton.sharedInstance.enteredBackground()
     }
+    
+    
 }
 
 extension Double {
