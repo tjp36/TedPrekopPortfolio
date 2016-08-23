@@ -110,7 +110,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             let client = clientName
             let desc = descriptionTextField.text ?? ""
             let time = totalTime
-            let price = (100.00 * time).roundToPlaces(2)
+            let price = (User.sharedInstance.rate! * time).roundToPlaces(2)
             matter = Matter(client: client!, desc: desc, time: time, price: price)
         }
         
@@ -147,7 +147,8 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             mail.setMessageBody("Client:  \(matter!.client!)\n" +
                                 "Description:  \(matter!.desc!)\n" +
                                 "Time:  \(matter!.time!)\n" +
-                                "Price:  \(matter!.price!)", isHTML: false)
+                                "Price:  $\(matter!.price!)", isHTML: false)
+            
             
             presentViewController(mail, animated: true, completion: nil)
         } else {

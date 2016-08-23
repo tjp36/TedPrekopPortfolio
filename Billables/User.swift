@@ -7,7 +7,7 @@
 //
 import Foundation
 
-class User{
+class User: NSObject, NSCoding{
     static let sharedInstance = User()
     
     // MARK: Properties
@@ -17,13 +17,9 @@ class User{
     var phoneNumber: String?
     var rate: Double?
     
-    private init(){
-        let aDecoder = NSCoder()
-        self.firstName = aDecoder.decodeObjectForKey(PropertyKey.firstNameKey) as? String
-        self.lastName = aDecoder.decodeObjectForKey(PropertyKey.lastNameKey) as? String
-        self.email = aDecoder.decodeObjectForKey(PropertyKey.emailKey) as? String
-        self.phoneNumber = aDecoder.decodeObjectForKey(PropertyKey.phoneNumberKey) as? String
-        self.rate = aDecoder.decodeDoubleForKey(PropertyKey.rateKey)
+    private override init(){
+        super.init()
+        
         
     }
     
@@ -49,6 +45,18 @@ class User{
         aCoder.encodeObject(email, forKey: PropertyKey.emailKey)
         aCoder.encodeObject(phoneNumber, forKey: PropertyKey.phoneNumberKey)
         aCoder.encodeDouble(rate!, forKey: PropertyKey.rateKey)
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder){
+        self.init()
+        
+        firstName = aDecoder.decodeObjectForKey(PropertyKey.firstNameKey) as? String
+        lastName = aDecoder.decodeObjectForKey(PropertyKey.lastNameKey) as? String
+        email = aDecoder.decodeObjectForKey(PropertyKey.emailKey) as? String
+        phoneNumber = aDecoder.decodeObjectForKey(PropertyKey.phoneNumberKey) as? String
+        rate = aDecoder.decodeDoubleForKey(PropertyKey.rateKey)
+        
+
     }
     
     

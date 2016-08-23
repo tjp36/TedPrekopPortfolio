@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController {
             lastName.text = savedSettings.lastName
             email.text = savedSettings.email
             phoneNumber.text = savedSettings.phoneNumber
-            billableRate.text = String(savedSettings.rate)
+            billableRate.text = String(format: "%.2f",savedSettings.rate!)
         }
     }
     
@@ -49,10 +49,13 @@ class SettingsViewController: UIViewController {
     @IBAction func saveSettings(sender: AnyObject) {
         
         User.sharedInstance.firstName = firstName.text
+        
         User.sharedInstance.lastName = lastName.text
         User.sharedInstance.email = email.text
         User.sharedInstance.phoneNumber = phoneNumber.text
+        
         User.sharedInstance.rate = Double(billableRate.text!)
+        
         saveSettings1()
         dismissViewControllerAnimated(true, completion: nil)
     }
