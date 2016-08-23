@@ -33,6 +33,15 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let savedSettings = loadSettings(){
+            User.sharedInstance.firstName = savedSettings.firstName
+            User.sharedInstance.lastName = savedSettings.lastName
+            User.sharedInstance.email = savedSettings.email
+            User.sharedInstance.rate = savedSettings.rate
+            User.sharedInstance.phoneNumber = savedSettings.phoneNumber
+        }
+        
         navLabel.title = clientName
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appEnteredBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appReturnedFromBackground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
@@ -57,7 +66,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("when does this get called")
+        
     }
     
     deinit {
@@ -109,9 +118,17 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         if(saveButton === sender){
             let client = clientName
             let desc = descriptionTextField.text ?? ""
+            if(totalTime <= 0){
+                totalTime = 0.1
+            }
             let time = totalTime
+            print(User.sharedInstance)
+            print(User.sharedInstance.firstName)
+            print(User.sharedInstance.rate!)
             let price = (User.sharedInstance.rate! * time).roundToPlaces(2)
-            matter = Matter(client: client!, desc: desc, time: time, price: price)
+            let date = NSDate()
+            print(date.description)
+            matter = Matter(client: client!, desc: desc, time: time, price: price, date: date)
         }
         
     
@@ -119,7 +136,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
 
     // MARK: Actions
     @IBAction func startTimer(sender: AnyObject) {
-          
+          print(TimerSingleton.sharedInstance)
         TimerSingleton.sharedInstance.start()
         saveButton.enabled = false
         
@@ -131,7 +148,8 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         let minutes = Double(counterMinute)
         totalTime = (hours + (minutes / 60)).roundToPlaces(1)
        
-        print(totalTime)
+        
+        
         TimerSingleton.sharedInstance.stop()
         
         timerLabelDecimal.text = "\(totalTime) hours"
@@ -142,14 +160,14 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["theodore.prekop@gmail.com"])
-            mail.setSubject("Bill for client:  \(matter!.client!)")
+            mail.setToRecipients([User.sharedInstance.email!])
+            mail.setSubject("Bill for Client:  \(matter!.client!)")
             mail.setMessageBody("Client:  \(matter!.client!)\n" +
                                 "Description:  \(matter!.desc!)\n" +
                                 "Time:  \(matter!.time!)\n" +
                                 "Price:  $\(matter!.price!)", isHTML: false)
             
-            
+          //  let json = try NSJSONSerialization.dataWithJSONObject(matter!, options: NSJSONWritingOptions.PrettyPrinted)
             presentViewController(mail, animated: true, completion: nil)
         } else {
             print("send email not available")
@@ -211,7 +229,9 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     }
 
     
-    
+    func loadSettings() -> User? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(User.ArchiveURL.path!) as? User
+    }
 
     
 }

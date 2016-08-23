@@ -56,6 +56,12 @@ class User: NSObject, NSCoding{
         phoneNumber = aDecoder.decodeObjectForKey(PropertyKey.phoneNumberKey) as? String
         rate = aDecoder.decodeDoubleForKey(PropertyKey.rateKey)
         
+        print(firstName)
+        print(lastName)
+        print(email)
+        print(phoneNumber)
+        print(rate)
+        
 
     }
     

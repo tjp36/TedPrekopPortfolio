@@ -50,12 +50,15 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatterTableViewCell
         
         let matter = client?.matters[indexPath.row]
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MM/dd/YYYY"
         
         cell.client.text = matter!.client
         cell.desc.text = matter!.desc
         cell.time.text = "\(matter!.time!.roundToPlaces(1)) hours"
+        cell.date.text = formatter.stringFromDate((matter?.date)!)
         
-        print(matter!.time)
+      
 
         return cell
     }
@@ -116,7 +119,7 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
             }
         }
         else if segue.identifier == "addMatter" {
-            print("Adding new matter.")
+           
             let matterDetailViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterDetailViewController
             matterDetailViewController.clientName = self.clientName
         }

@@ -16,6 +16,7 @@ class ClientTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       
         /// Load any saved meals, otherwise load sample data.
         if let savedClients = loadClients() {
             clients = savedClients
@@ -124,12 +125,12 @@ class ClientTableViewController: UITableViewController {
             let matterTableViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterTableViewController
             
             if let selectedClientCell = sender as? ClientTableViewCell{
-                print(selectedClientCell)
+                
                 let indexPath = tableView.indexPathForCell(selectedClientCell)
                 let selectedClient = clients[indexPath!.row]
                 
                 matterTableViewController.navLabel.title = selectedClient.name
-                print(selectedClient.name)
+                
                 matterTableViewController.clientName = selectedClient.name
                 
         

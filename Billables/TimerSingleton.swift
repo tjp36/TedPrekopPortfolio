@@ -28,6 +28,7 @@ class TimerSingleton{
     private init(){}
     
     func start(){
+        print(TimerSingleton.sharedInstance)
         isTimerRunning = true
         startTime = NSDate()
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -35,7 +36,7 @@ class TimerSingleton{
         defaults.setBool(isTimerRunning, forKey: "isTimerRunning")
         
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-        print("Starting")
+        
     }
     
     @objc func timerAction(){
@@ -66,7 +67,7 @@ class TimerSingleton{
         let now = defaults.objectForKey("StartDate") as! NSDate
         var currentTime = -1 * Int(now.timeIntervalSinceNow)
         
-        print(currentTime)
+       
         
         while(currentTime >= 60){
             currentTime -= 60

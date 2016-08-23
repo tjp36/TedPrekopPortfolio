@@ -14,6 +14,7 @@ class MatterTableViewCell: UITableViewCell {
     @IBOutlet weak var client: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var date: UILabel!
     
    
     
