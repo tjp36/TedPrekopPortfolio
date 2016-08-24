@@ -21,14 +21,14 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let savedSettings = loadSettings(){
-            print(savedSettings)
-            firstName.text = savedSettings.firstName
-            lastName.text = savedSettings.lastName
-            email.text = savedSettings.email
-            phoneNumber.text = savedSettings.phoneNumber
-            billableRate.text = String(format: "%.2f",savedSettings.rate!)
-        }
+        User.sharedInstance.loadValues()
+        
+        firstName.text = User.sharedInstance.firstName
+        lastName.text = User.sharedInstance.lastName
+        email.text = User.sharedInstance.email
+        phoneNumber.text = User.sharedInstance.phoneNumber
+        billableRate.text = String(format: "%.2f",User.sharedInstance.rate!)
+        
         
         print(User.sharedInstance)
     }
@@ -59,25 +59,9 @@ class SettingsViewController: UIViewController {
         
         User.sharedInstance.rate = Double(billableRate.text!)
         
-        saveSettingsNSCoding()
+        User.sharedInstance.saveValues()
+        
         dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    // MARK: NSCoding
-    func saveSettingsNSCoding(){
-        /// Code to save user so that same user is there when we restart app
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject( User.sharedInstance  , toFile: User.ArchiveURL.path!)
-        if !isSuccessfulSave {
-            print("Failed to save settings...")
-        }
-        else{
-            print("saved settings")
-        }
-    }
-    
-    ///Code to load the Settings when we open the page
-    func loadSettings() -> User? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(User.ArchiveURL.path!) as? User
     }
     
     

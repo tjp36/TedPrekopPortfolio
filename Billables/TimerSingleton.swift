@@ -28,7 +28,6 @@ class TimerSingleton{
     private init(){}
     
     func start(){
-        //print(TimerSingleton.sharedInstance)
         isTimerRunning = true
         startTime = NSDate()
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -40,7 +39,6 @@ class TimerSingleton{
     }
     
     @objc func timerAction(){
-        //print(counter)
         counter += 1
         self.delegate?.updateLabel(counter)
         if(counter == 60){

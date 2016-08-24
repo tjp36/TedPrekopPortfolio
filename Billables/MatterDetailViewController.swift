@@ -38,15 +38,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if let savedSettings = loadSettings(){
-//            User.sharedInstance.firstName = savedSettings.firstName
-//            User.sharedInstance.lastName = savedSettings.lastName
-//            User.sharedInstance.email = savedSettings.email
-//            User.sharedInstance.rate = savedSettings.rate
-//            User.sharedInstance.phoneNumber = savedSettings.phoneNumber
-//        }
-        
-  
+        User.sharedInstance.loadValues()
         
         navLabel.title = clientName
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appEnteredBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
@@ -64,10 +56,6 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             navigationItem.title = matter.client?.name
             descriptionTextField.text = matter.desc
         }
-        
-        print(self.client!)
-      
-
       
     }
     
@@ -81,7 +69,6 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: UITextFieldDelegate
@@ -128,10 +115,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
                 totalTime = 0.1
             }
             let time = Double(timeField.text!)
-//            print(User.sharedInstance)
-//            print(User.sharedInstance.firstName)
-//            print(User.sharedInstance.rate!)
-            let price = (100 * time!).roundToPlaces(2)
+            let price = (User.sharedInstance.rate! * time!).roundToPlaces(2)
             let date = datePicker.date
             
             matter = Matter(client: self.client!, desc: desc, time: time!, price: price, date: date)
@@ -203,13 +187,11 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     }
     
     func appReturnedFromBackground(notification:NSNotification){
-        //print("back from lock")
         
         let defaults = NSUserDefaults.standardUserDefaults()
         let now = defaults.objectForKey("StartDate") as! NSDate
         
         let currentTime = -1 * Int(now.timeIntervalSinceNow)
-        //print(currentTime)
         
         counterHour = currentTime / 3600
         counterMinute = currentTime / 60
@@ -235,14 +217,6 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         TimerSingleton.sharedInstance.returnedFromBackground()
     }
 
-    
-    func loadSettings() -> User? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(User.ArchiveURL.path!) as? User
-    }
-    
-   
-
-    
 }
 
 extension Double {
@@ -256,7 +230,7 @@ extension Double {
 extension MatterDetailViewController: TimerLabelDelegate{
     func updateLabel(counter: Int) {
         var counter1 = counter
-        //print(counter1)
+        
         if(counter1 == 60){
             counter1 = 0
             counterMinute += 1
