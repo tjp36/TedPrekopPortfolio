@@ -197,20 +197,36 @@
             </objects>
             <point key="canvasLocation" x="941" y="-238"/>
         </scene>
-        <!--View Controller-->
+        <!--Past Week's Hours-->
         <scene sceneID="ajC-eY-c7q">
             <objects>
-                <viewController id="SG9-Gx-WdZ" sceneMemberID="viewController">
+                <viewController id="SG9-Gx-WdZ" customClass="ChartViewController" customModule="Billables" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cxi-ay-zBc"/>
                         <viewControllerLayoutGuide type="bottom" id="zMG-lX-NQa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mDa-Pw-MCg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcZ-iU-Igz" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zMG-lX-NQa" firstAttribute="top" secondItem="gcZ-iU-Igz" secondAttribute="bottom" id="2KR-eZ-yan"/>
+                            <constraint firstItem="gcZ-iU-Igz" firstAttribute="leading" secondItem="mDa-Pw-MCg" secondAttribute="leading" id="Vhp-e1-oUr"/>
+                            <constraint firstItem="gcZ-iU-Igz" firstAttribute="top" secondItem="cxi-ay-zBc" secondAttribute="bottom" id="WMQ-HE-ODy"/>
+                            <constraint firstAttribute="trailing" secondItem="gcZ-iU-Igz" secondAttribute="trailing" id="xtT-cZ-pvd"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" prompt="" id="sZU-Sa-ffD"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Past Week's Hours" prompt="" id="sZU-Sa-ffD"/>
+                    <connections>
+                        <outlet property="barChartView" destination="gcZ-iU-Igz" id="2zw-KQ-KTH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6Z-3N-eeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -253,7 +269,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rR2-Jd-8d2">
                                             <rect key="frame" x="260" y="30" width="122" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -403,7 +419,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="S2H-gH-Hmb">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oVE-ZX-C6O">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OYy-g1-KJy">
@@ -436,7 +452,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="200" translatesAutoresizingMaskIntoConstraints="NO" id="16N-De-tjI">
-                                        <rect key="frame" x="167" y="33" width="266" height="30"/>
+                                        <rect key="frame" x="167" y="21" width="266" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmB-Y5-pBC">
                                                 <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
@@ -454,22 +470,33 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eYD-Oc-PPZ">
-                                        <rect key="frame" x="216" y="75" width="168" height="412"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8QL-OF-9G2">
+                                        <rect key="frame" x="140" y="51" width="320" height="436"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time (Decimal):  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPj-A6-jt7">
-                                                <rect key="frame" x="20" y="0.0" width="129" height="21"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k89-HY-VtP">
+                                                <rect key="frame" x="148" y="0.0" width="25" height="139"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            </textField>
+                                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="q7z-eT-dIP">
+                                                <rect key="frame" x="0.0" y="139" width="320" height="216"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="493679167.91636598">
+                                                    <!--2016-08-23 21:06:07 +0000-->
+                                                </date>
+                                            </datePicker>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time (Decimal):  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPj-A6-jt7">
+                                                <rect key="frame" x="96" y="355" width="129" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Description Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3S-4a-36I">
-                                                <rect key="frame" x="0.0" y="33" width="168" height="337"/>
+                                                <rect key="frame" x="76" y="376" width="168" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJn-3B-xsD">
-                                                <rect key="frame" x="46" y="382" width="76" height="30"/>
+                                                <rect key="frame" x="122" y="406" width="76" height="30"/>
                                                 <state key="normal" title="Send Email"/>
                                                 <connections>
                                                     <action selector="sendEmail:" destination="wX2-gO-i7D" eventType="touchUpInside" id="51r-Qu-G5T"/>
@@ -482,10 +509,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="S2H-gH-Hmb" firstAttribute="leading" secondItem="3ko-Yj-Seb" secondAttribute="leading" id="6om-LR-1Te"/>
-                            <constraint firstItem="S2H-gH-Hmb" firstAttribute="top" secondItem="eop-5o-8Mj" secondAttribute="bottom" id="GTe-bW-xYA"/>
-                            <constraint firstAttribute="trailing" secondItem="S2H-gH-Hmb" secondAttribute="trailing" id="oeF-bL-TpR"/>
-                            <constraint firstItem="SUg-Lk-dtb" firstAttribute="top" secondItem="S2H-gH-Hmb" secondAttribute="bottom" id="yy2-Tp-9nF"/>
+                            <constraint firstItem="oVE-ZX-C6O" firstAttribute="leading" secondItem="3ko-Yj-Seb" secondAttribute="leading" id="6iC-Vj-i1l"/>
+                            <constraint firstItem="SUg-Lk-dtb" firstAttribute="top" secondItem="oVE-ZX-C6O" secondAttribute="bottom" id="7Nw-if-GaE"/>
+                            <constraint firstItem="oVE-ZX-C6O" firstAttribute="top" secondItem="eop-5o-8Mj" secondAttribute="bottom" id="DPD-67-skD"/>
+                            <constraint firstAttribute="trailing" secondItem="oVE-ZX-C6O" secondAttribute="trailing" id="ggq-HF-Qtc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Matter" id="q5A-Gh-49m">
@@ -501,9 +528,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="datePicker" destination="q7z-eT-dIP" id="Ove-kN-gKO"/>
                         <outlet property="descriptionTextField" destination="H3S-4a-36I" id="bcG-V0-heW"/>
                         <outlet property="navLabel" destination="q5A-Gh-49m" id="MGb-8x-7t8"/>
                         <outlet property="saveButton" destination="mwi-57-TrA" id="HZ5-eS-N8T"/>
+                        <outlet property="timeField" destination="k89-HY-VtP" id="pgS-Zl-Z3B"/>
                         <outlet property="timerLabelDecimal" destination="nPj-A6-jt7" id="g07-Ij-hr9"/>
                         <outlet property="timerLabelHour" destination="YZo-jB-YDd" id="g2q-j1-1NE"/>
                         <outlet property="timerLabelMinute" destination="73Y-hj-1nn" id="IBz-0z-M8p"/>

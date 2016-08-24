@@ -9,10 +9,11 @@
 import UIKit
 import MessageUI
 
-class MatterDetailViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
+class MatterDetailViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, MFMailComposeViewControllerDelegate{
 
     // MARK: Properties
     var matter: Matter?
+    var client: Client?
     var counterHour: Int = 0
     var counterMinute: Int = 0
     var counterSecond: Int = 0
@@ -22,6 +23,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
    
     
    
+   
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var navLabel: UINavigationItem!
 
@@ -30,17 +32,21 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     @IBOutlet weak var timerLabelSecond: UILabel!
     @IBOutlet weak var timerLabelDecimal: UILabel!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var timeField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let savedSettings = loadSettings(){
-            User.sharedInstance.firstName = savedSettings.firstName
-            User.sharedInstance.lastName = savedSettings.lastName
-            User.sharedInstance.email = savedSettings.email
-            User.sharedInstance.rate = savedSettings.rate
-            User.sharedInstance.phoneNumber = savedSettings.phoneNumber
-        }
+//        if let savedSettings = loadSettings(){
+//            User.sharedInstance.firstName = savedSettings.firstName
+//            User.sharedInstance.lastName = savedSettings.lastName
+//            User.sharedInstance.email = savedSettings.email
+//            User.sharedInstance.rate = savedSettings.rate
+//            User.sharedInstance.phoneNumber = savedSettings.phoneNumber
+//        }
+        
+  
         
         navLabel.title = clientName
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appEnteredBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
@@ -55,11 +61,11 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         TimerSingleton.sharedInstance.delegate = self
         
         if let matter = matter{
-            navigationItem.title = matter.client
+            navigationItem.title = matter.client?.name
             descriptionTextField.text = matter.desc
         }
         
-        
+        print(self.client!)
       
 
       
@@ -116,19 +122,19 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(saveButton === sender){
-            let client = clientName
+            
             let desc = descriptionTextField.text ?? ""
             if(totalTime <= 0){
                 totalTime = 0.1
             }
-            let time = totalTime
-            print(User.sharedInstance)
-            print(User.sharedInstance.firstName)
-            print(User.sharedInstance.rate!)
-            let price = (User.sharedInstance.rate! * time).roundToPlaces(2)
-            let date = NSDate()
-            print(date.description)
-            matter = Matter(client: client!, desc: desc, time: time, price: price, date: date)
+            let time = Double(timeField.text!)
+//            print(User.sharedInstance)
+//            print(User.sharedInstance.firstName)
+//            print(User.sharedInstance.rate!)
+            let price = (100 * time!).roundToPlaces(2)
+            let date = datePicker.date
+            
+            matter = Matter(client: self.client!, desc: desc, time: time!, price: price, date: date)
         }
         
     
@@ -136,7 +142,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
 
     // MARK: Actions
     @IBAction func startTimer(sender: AnyObject) {
-          print(TimerSingleton.sharedInstance)
+         // print(TimerSingleton.sharedInstance)
         TimerSingleton.sharedInstance.start()
         saveButton.enabled = false
         
@@ -153,6 +159,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         TimerSingleton.sharedInstance.stop()
         
         timerLabelDecimal.text = "\(totalTime) hours"
+        timeField.text = String(totalTime)
         saveButton.enabled = true
     }
     
@@ -196,13 +203,13 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     }
     
     func appReturnedFromBackground(notification:NSNotification){
-        print("back from lock")
+        //print("back from lock")
         
         let defaults = NSUserDefaults.standardUserDefaults()
         let now = defaults.objectForKey("StartDate") as! NSDate
         
         let currentTime = -1 * Int(now.timeIntervalSinceNow)
-        print(currentTime)
+        //print(currentTime)
         
         counterHour = currentTime / 3600
         counterMinute = currentTime / 60
@@ -219,7 +226,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             }
         }
         
-        print("Counter is \(counterSecond)")
+       // print("Counter is \(counterSecond)")
         
         timerLabelHour.text = "\(counterHour):"
         timerLabelMinute.text = "\(counterMinute):"
@@ -232,6 +239,8 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     func loadSettings() -> User? {
         return NSKeyedUnarchiver.unarchiveObjectWithFile(User.ArchiveURL.path!) as? User
     }
+    
+   
 
     
 }

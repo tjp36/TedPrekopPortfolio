@@ -12,7 +12,10 @@ class Matter: NSObject, NSCoding{
     
     // MARK: Properties
     
-    let client: String?
+    //let client: String?
+    
+    
+    let client: Client?
     var desc: String?
     var time: Double?
     var price: Double?
@@ -21,7 +24,7 @@ class Matter: NSObject, NSCoding{
     // MARK: Archiving Paths
     
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("matters1")
+    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("clients", isDirectory: true)
     
     // MARK: Types
     
@@ -35,7 +38,7 @@ class Matter: NSObject, NSCoding{
     
      // MARK: Initialization
     
-    init?(client: String, desc: String, time: Double, price: Double, date: NSDate){
+    init?(client: Client, desc: String, time: Double, price: Double, date: NSDate){
         self.client = client
         self.desc = desc
         self.time = time
@@ -60,7 +63,7 @@ class Matter: NSObject, NSCoding{
     }
     
     required convenience init?(coder aDecoder: NSCoder){
-        let client = aDecoder.decodeObjectForKey(PropertyKey.clientKey) as! String
+        let client = aDecoder.decodeObjectForKey(PropertyKey.clientKey) as! Client
         let desc = aDecoder.decodeObjectForKey(PropertyKey.descKey) as! String
         let time = aDecoder.decodeDoubleForKey(PropertyKey.timeKey)
         let price = aDecoder.decodeDoubleForKey(PropertyKey.priceKey)

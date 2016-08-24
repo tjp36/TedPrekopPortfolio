@@ -28,7 +28,7 @@ class TimerSingleton{
     private init(){}
     
     func start(){
-        print(TimerSingleton.sharedInstance)
+        //print(TimerSingleton.sharedInstance)
         isTimerRunning = true
         startTime = NSDate()
         let defaults = NSUserDefaults.standardUserDefaults()

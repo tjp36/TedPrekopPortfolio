@@ -11,6 +11,7 @@ class User: NSObject, NSCoding{
     static let sharedInstance = User()
     
     // MARK: Properties
+    //var user: User?
     var firstName: String?
     var lastName: String?
     var email: String?
@@ -20,7 +21,7 @@ class User: NSObject, NSCoding{
     private override init(){
         super.init()
         
-        
+        //self.user = NSKeyedUnarchiver.unarchiveObjectWithFile(User.ArchiveURL.path!) as? User
     }
     
     // MARK: Archiving Paths

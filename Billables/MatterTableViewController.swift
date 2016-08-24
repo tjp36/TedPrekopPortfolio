@@ -12,20 +12,21 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
     
     @IBOutlet weak var navLabel: UINavigationItem!
     //var matters = [Matter]()
-    var clientName: String?
+    
     var client: Client?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let savedMatters = loadMatters() {
-            client!.matters = savedMatters
-        }
-        else {
-            /// Load the sample data.
-            
-        }
+//        if let savedMatters = loadMatters() {
+//            client!.matters = savedMatters
+//        }
+//        else {
+//            /// Load the sample data.
+//            
+//        }
+        print(client?.matters)
         
     }
 
@@ -53,7 +54,7 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM/dd/YYYY"
         
-        cell.client.text = matter!.client
+        cell.client.text = matter!.client?.name
         cell.desc.text = matter!.desc
         cell.time.text = "\(matter!.time!.roundToPlaces(1)) hours"
         cell.date.text = formatter.stringFromDate((matter?.date)!)
@@ -114,14 +115,15 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
             if let selectedMatterCell = sender as? MatterTableViewCell{
                 let indexPath = tableView.indexPathForCell(selectedMatterCell)
                 let selectedMatter = client!.matters[indexPath!.row]
-                matterDetailViewController.matter = selectedMatter
                 
+                matterDetailViewController.matter = selectedMatter
+                matterDetailViewController.client = client!
             }
         }
         else if segue.identifier == "addMatter" {
            
             let matterDetailViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterDetailViewController
-            matterDetailViewController.clientName = self.clientName
+            matterDetailViewController.client = self.client
         }
         
     }
@@ -144,16 +146,31 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
     }
     
     func saveMatters(){
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(client!.matters, toFile: Matter.ArchiveURL.path! + "\(clientName)")
+        
+        var clientAry = NSKeyedUnarchiver.unarchiveObjectWithFile(Client.ArchiveURL.path!) as? [Client]
+        print(clientAry)
+        for (index, client) in clientAry!.enumerate(){
+            if client.name == self.client!.name{
+                clientAry![index] = self.client!
+            }
+        }
+        
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(clientAry!, toFile: Client.ArchiveURL.path!)
+        
         if !isSuccessfulSave{
             print("Failed to save matter")
+        }
+        else{
+            print("saved matter to \(Matter.ArchiveURL.path!)")
         }
     }
     
     ///Code to load the meals when we start up app
-    func loadMatters() -> [Matter]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Matter.ArchiveURL.path! + "\(clientName)") as? [Matter]
-    }
+//    func loadMatters() -> [Matter]? {
+//        let filePath = Matter.ArchiveURL.URLByAppendingPathComponent(clientName!)
+//        print(filePath.path!)
+//        return NSKeyedUnarchiver.unarchiveObjectWithFile(filePath.path!) as? [Matter]
+//    }
  
 
 }
