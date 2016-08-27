@@ -50,6 +50,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         
         
         descriptionTextField.delegate = self
+        timeField.delegate = self
         TimerSingleton.sharedInstance.delegate = self
         
         if let matter = matter{
@@ -76,6 +77,10 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         /// Hide the keyboard.
         textField.resignFirstResponder()
         return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        timeField.resignFirstResponder()
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -152,8 +157,8 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients([User.sharedInstance.email!])
-            mail.setSubject("Bill for Client:  \(matter!.client!)")
-            mail.setMessageBody("Client:  \(matter!.client!)\n" +
+            mail.setSubject("Bill for Client:  \(matter!.client!.name!)")
+            mail.setMessageBody("Client:  \(matter!.client!.name!)\n" +
                                 "Description:  \(matter!.desc!)\n" +
                                 "Time:  \(matter!.time!)\n" +
                                 "Price:  $\(matter!.price!)", isHTML: false)

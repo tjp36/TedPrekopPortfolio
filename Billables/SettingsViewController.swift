@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     @IBOutlet weak var firstName: UITextField!
@@ -31,11 +31,28 @@ class SettingsViewController: UIViewController {
         
         
         print(User.sharedInstance)
+        
+        firstName.delegate = self
+        lastName.delegate = self
+        billableRate.delegate = self
+        email.delegate = self
+        phoneNumber.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: UITextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        /// Hide the keyboard.
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        billableRate.resignFirstResponder()
     }
     
     
