@@ -6,33 +6,22 @@
 //  Copyright © 2016 Theodore Prekop. All rights reserved.
 //
 
+///This class is responible for controlling the Matters table of the client
+
 import UIKit
 
 class MatterTableViewController: UITableViewController, UINavigationControllerDelegate {
     
+    //MARK: - Properties
     @IBOutlet weak var navLabel: UINavigationItem!
-    //var matters = [Matter]()
-    
     var client: Client?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if let savedMatters = loadMatters() {
-//            client!.matters = savedMatters
-//        }
-//        else {
-//            /// Load the sample data.
-//            
-//        }
-        print(client?.matters)
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -45,7 +34,6 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         return client!.matters.count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "matterCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatterTableViewCell
@@ -54,13 +42,12 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM/dd/YYYY"
         
+        //Set the elements of the cell
         cell.client.text = matter!.client?.name
         cell.desc.text = matter!.desc
         cell.time.text = "\(matter!.time!.roundToPlaces(1)) hours"
         cell.date.text = formatter.stringFromDate((matter?.date)!)
-        
-      
-
+    
         return cell
     }
  
@@ -105,10 +92,8 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
             dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "showDetail"){
             let matterDetailViewController = segue.destinationViewController as! MatterDetailViewController
@@ -116,16 +101,16 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
                 let indexPath = tableView.indexPathForCell(selectedMatterCell)
                 let selectedMatter = client!.matters[indexPath!.row]
                 
+                //Set the matter and client of the MatterDetailViewController
                 matterDetailViewController.matter = selectedMatter
                 matterDetailViewController.client = client!
             }
         }
         else if segue.identifier == "addMatter" {
-           
+            //Set the matter and client of the MatterDetailViewController
             let matterDetailViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterDetailViewController
             matterDetailViewController.client = self.client
         }
-        
     }
     
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
@@ -145,10 +130,11 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         saveMatters()
     }
     
+    //This function saves the matters to the current client
     func saveMatters(){
         
+        //Find the current client from the saved clients.  Update that client with the client in the App's memory
         var clientAry = NSKeyedUnarchiver.unarchiveObjectWithFile(Client.ArchiveURL.path!) as? [Client]
-        print(clientAry)
         for (index, client) in clientAry!.enumerate(){
             if client.name == self.client!.name{
                 clientAry![index] = self.client!
@@ -164,13 +150,5 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
             print("saved matter to \(Matter.ArchiveURL.path!)")
         }
     }
-    
-    ///Code to load the meals when we start up app
-//    func loadMatters() -> [Matter]? {
-//        let filePath = Matter.ArchiveURL.URLByAppendingPathComponent(clientName!)
-//        print(filePath.path!)
-//        return NSKeyedUnarchiver.unarchiveObjectWithFile(filePath.path!) as? [Matter]
-//    }
- 
 
 }

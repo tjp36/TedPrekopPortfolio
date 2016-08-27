@@ -6,6 +6,8 @@
 //  Copyright © 2016 Theodore Prekop. All rights reserved.
 //
 
+///This class is responsible for showing the splash screen of the application
+
 import UIKit
 
 class ShowSplashViewController: UIViewController {
@@ -13,6 +15,7 @@ class ShowSplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Show splash screen for 2 seconds
         performSelector(#selector(ShowSplashViewController.showNavController), withObject: nil, afterDelay: 2.0)
     }
 
@@ -21,18 +24,9 @@ class ShowSplashViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //Show the splash screen 
     func showNavController(){
         performSegueWithIdentifier("showSplash", sender: self)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

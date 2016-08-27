@@ -6,6 +6,8 @@
 //  Copyright © 2016 Theodore Prekop. All rights reserved.
 //
 
+//This class is responsible for controlling the settings
+
 import UIKit
 
 class SettingsViewController: UIViewController, UITextFieldDelegate {
@@ -17,21 +19,20 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Load the user settings from NSUser defaults
         User.sharedInstance.loadValues()
         
+        //Fill in the text fields with the stored settings
         firstName.text = User.sharedInstance.firstName
         lastName.text = User.sharedInstance.lastName
         email.text = User.sharedInstance.email
         phoneNumber.text = User.sharedInstance.phoneNumber
         billableRate.text = String(format: "%.2f",User.sharedInstance.rate!)
         
-        
-        print(User.sharedInstance)
-        
+        //Assign delegates
         firstName.delegate = self
         lastName.delegate = self
         billableRate.delegate = self
@@ -41,7 +42,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: UITextFieldDelegate
@@ -55,32 +55,19 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         billableRate.resignFirstResponder()
     }
     
-    
-    /*
-     // MARK: - Navigation
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     // MARK: Actions
+    
+    //Save the user settings and dismiss the view controller
     @IBAction func saveSettings(sender: AnyObject) {
         
         User.sharedInstance.firstName = firstName.text
-        
         User.sharedInstance.lastName = lastName.text
         User.sharedInstance.email = email.text
         User.sharedInstance.phoneNumber = phoneNumber.text
-        
         User.sharedInstance.rate = Double(billableRate.text!)
         
         User.sharedInstance.saveValues()
         
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
-    
 }

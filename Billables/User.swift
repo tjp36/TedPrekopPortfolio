@@ -5,10 +5,14 @@
 //  Created by Theodore Prekop on 8/14/16.
 //  Copyright © 2016 Theodore Prekop. All rights reserved.
 //
+
+///This singleton is responsible for saving and loading the User Settings
+
 import Foundation
 
 class User : NSObject {
     
+    //MARK: - Properties
     var firstName: String?
     var lastName: String?
     var email: String?
@@ -19,6 +23,7 @@ class User : NSObject {
     
     private override init(){}
     
+    //MARK: - Types
     struct PropertyKey {
         static let firstNameKey = "firstName"
         static let lastNameKey = "lastName"

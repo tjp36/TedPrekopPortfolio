@@ -6,15 +6,13 @@
 //  Copyright © 2016 Theodore Prekop. All rights reserved.
 //
 
+///This class defines the Matter object used throughout the application
+
 import Foundation
 
 class Matter: NSObject, NSCoding{
     
     // MARK: Properties
-    
-    //let client: String?
-    
-    
     let client: Client?
     var desc: String?
     var time: Double?
@@ -22,12 +20,10 @@ class Matter: NSObject, NSCoding{
     var date: NSDate?
     
     // MARK: Archiving Paths
-    
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("clients", isDirectory: true)
     
     // MARK: Types
-    
     struct PropertyKey {
         static let clientKey = "client"
         static let descKey = "desc"
@@ -36,8 +32,7 @@ class Matter: NSObject, NSCoding{
         static let dateKey = "date"
     }
     
-     // MARK: Initialization
-    
+    // MARK: Initialization
     init?(client: Client, desc: String, time: Double, price: Double, date: NSDate){
         self.client = client
         self.desc = desc
@@ -47,6 +42,7 @@ class Matter: NSObject, NSCoding{
         
         super.init()
         
+        //Prevent matters of duration 0
         if(time.isZero){
             return nil
         }
@@ -70,6 +66,5 @@ class Matter: NSObject, NSCoding{
         let date = aDecoder.decodeObjectForKey(PropertyKey.dateKey) as! NSDate
 
         self.init(client: client, desc: desc, time: time, price: price, date: date)
-        
     }
 }

@@ -6,6 +6,8 @@
 //  Copyright © 2016 Theodore Prekop. All rights reserved.
 //
 
+//This controller is responsible for adding client profiles
+
 import UIKit
 
 class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -15,14 +17,11 @@ class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePic
     @IBOutlet weak var clientImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
    
-
-    
     var client: Client?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.delegate = self
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +55,6 @@ class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePic
     
     // MARK: UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        
         /// Dismiss the picker if the user canceled.
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -72,20 +70,14 @@ class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePic
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-
-    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         
         if saveButton === sender {
             let name = nameField.text ?? ""
             let photo = clientImage.image
             let matters = [Matter]()
-            
             
             /// Set the client to be passed to ClientTableViewController after the unwind segue.
             client = Client(name: name, photo: photo, matters: matters)
@@ -109,8 +101,7 @@ class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePic
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    
-    
+    //Dismiss the add client view controller
     @IBAction func cancel(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
     }

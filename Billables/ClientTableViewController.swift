@@ -16,11 +16,12 @@ class ClientTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //If this is the 5th launch, show the Rate Me alert
         if(NSUserDefaults.standardUserDefaults().integerForKey("HasLaunchedFiveTimes") == 5){
             showRatingAlert()
         }
         
-        /// Load any saved meals, otherwise load sample data.
+        /// Load any saved clients, otherwise load the sample clients
         if let savedClients = loadClients() {
             clients = savedClients
         }
@@ -28,11 +29,7 @@ class ClientTableViewController: UITableViewController {
             /// Load the sample data.
             loadSampleClients()
         }
-        
-        print(clients[0].matters)
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,8 +52,6 @@ class ClientTableViewController: UITableViewController {
         clients.append(client1!)
         clients.append(client2!)
         clients.append(client3!)
-        
-        //saveClients()
     }
     
     
@@ -70,21 +65,18 @@ class ClientTableViewController: UITableViewController {
         return clients.count
     }
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier = "clientCell"
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ClientTableViewCell
-        
         let client = clients[indexPath.row]
         
+        //Set client name and photo for each cell
         cell.client.text = client.name
         cell.clientImage.image = client.photo
         
         return cell
     }
-    
     
     /*
      // Override to support conditional editing of the table view.
@@ -94,34 +86,14 @@ class ClientTableViewController: UITableViewController {
      }
      */
     
-    
      // Override to support editing the table view.
      override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
      // Delete the row from the data source
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
      }
- 
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    
     
     // MARK: - Navigation
     
@@ -129,37 +101,32 @@ class ClientTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        
         if(segue.identifier == "showMatters"){
-            
+    
             let matterTableViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterTableViewController
-            
             if let selectedClientCell = sender as? ClientTableViewCell{
                 
                 let indexPath = tableView.indexPathForCell(selectedClientCell)
                 let selectedClient = clients[indexPath!.row]
                 
+                //Set the client equal to the client represented in the selected cell
                 matterTableViewController.navLabel.title = selectedClient.name
-                
-                
-                
-                
                 matterTableViewController.client = selectedClient
                 saveClients()
             }
-            
         }
     }
     
+    //After returning from the AddClientViewController, append the new client to clients array and save
     @IBAction func unwindToClientList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? AddClientViewController, client = sourceViewController.client {
-
                 let newIndexPath = NSIndexPath(forRow: clients.count, inSection: 0)
                 clients.append(client)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-           
             saveClients()
         }
     }
     
+    //Alert controller to be displayed upon the 5th launch of the application
     func showRatingAlert(){
         let alert = UIAlertController(title: "Rate Me", message: "Thanks for using Billables", preferredStyle: UIAlertControllerStyle.Alert)
 
@@ -172,12 +139,11 @@ class ClientTableViewController: UITableViewController {
         }))
         
         self.presentViewController(alert, animated: true, completion: nil)
-
     }
     
     // MARK: NSCoding
     func saveClients(){
-        /// Code to save meals so that same meals are there when we restart app
+        /// Code to save clients so that same clients are there when we restart app
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(clients, toFile: Client.ArchiveURL.path!)
         if !isSuccessfulSave {
             print("Failed to save clients...")
@@ -187,11 +153,8 @@ class ClientTableViewController: UITableViewController {
         }
     }
     
-    ///Code to load the meals when we start up app
+    ///Code to load the clients when we start up app
     func loadClients() -> [Client]? {
-        print("called")
         return NSKeyedUnarchiver.unarchiveObjectWithFile(Client.ArchiveURL.path!) as? [Client]
     }
- 
-
 }

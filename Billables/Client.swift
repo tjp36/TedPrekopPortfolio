@@ -6,6 +6,8 @@
 //  Copyright © 2016 Theodore Prekop. All rights reserved.
 //
 
+///This class is responsible for the Client object used throughout the application
+
 import UIKit
 
 class Client: NSObject, NSCoding{
@@ -16,12 +18,10 @@ class Client: NSObject, NSCoding{
     var matters: [Matter]
     
     // MARK: Archiving Paths
-    
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("clients")
     
     // MARK: Types
-    
     struct PropertyKey {
         static let nameKey = "name"
         static let photoKey = "photo"
@@ -29,7 +29,6 @@ class Client: NSObject, NSCoding{
     }
     
     // MARK: Initialization
-    
     init?(name: String, photo: UIImage?, matters: [Matter]){
         self.name = name
         self.photo = photo
@@ -37,6 +36,7 @@ class Client: NSObject, NSCoding{
         
         super.init()
         
+        //Prevents clients without names from being saved
         if(name.isEmpty){
             return nil
         }
@@ -58,6 +58,4 @@ class Client: NSObject, NSCoding{
         self.init(name: name, photo: photo, matters: matters)
         
     }
-    
-    
 }
