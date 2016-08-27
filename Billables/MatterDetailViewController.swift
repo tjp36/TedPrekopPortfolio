@@ -153,6 +153,20 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     }
     
     @IBAction func sendEmail(sender: AnyObject) {
+        
+        if(User.sharedInstance.email == nil || User.sharedInstance.rate == nil){
+            
+            let alert = UIAlertController(title: "User Settings Not Set", message: "Please go to Settings and set your user profile to use this feature", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { alertAction in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self

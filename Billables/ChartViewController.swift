@@ -28,7 +28,7 @@ class ChartViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("THIS GETS CALLED")
+        
         clients = loadClients()!
       
         getTimePerDay()
