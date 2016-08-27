@@ -16,6 +16,9 @@ class ClientTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(NSUserDefaults.standardUserDefaults().integerForKey("HasLaunchedFiveTimes") == 5){
+            showRatingAlert()
+        }
         
         /// Load any saved meals, otherwise load sample data.
         if let savedClients = loadClients() {
@@ -91,17 +94,17 @@ class ClientTableViewController: UITableViewController {
      }
      */
     
-    /*
+    
      // Override to support editing the table view.
      override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
+        if editingStyle == .Delete {
      // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } else if editingStyle == .Insert {
      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
      }
-     }
-     */
+ 
     
     /*
      // Override to support rearranging the table view.
@@ -119,10 +122,12 @@ class ClientTableViewController: UITableViewController {
      */
     
     
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       
         if(segue.identifier == "showMatters"){
             
             let matterTableViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterTableViewController
@@ -153,6 +158,21 @@ class ClientTableViewController: UITableViewController {
            
             saveClients()
         }
+    }
+    
+    func showRatingAlert(){
+        let alert = UIAlertController(title: "Rate Me", message: "Thanks for using Billables", preferredStyle: UIAlertControllerStyle.Alert)
+
+        alert.addAction(UIAlertAction(title: "Rate the App", style: UIAlertActionStyle.Default, handler: { alertAction in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No Thanks", style: UIAlertActionStyle.Default, handler: { alertAction in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+
     }
     
     // MARK: NSCoding

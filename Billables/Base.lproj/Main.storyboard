@@ -161,9 +161,11 @@
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ct7-LH-Clf">
                                             <rect key="frame" x="0.0" y="0.0" width="66" height="59"/>
+                                            <gestureRecognizers/>
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="client" destination="65E-Yb-bbo" id="WTx-m9-XPm"/>
                                     <outlet property="clientImage" destination="ct7-LH-Clf" id="nOd-3g-97X"/>
