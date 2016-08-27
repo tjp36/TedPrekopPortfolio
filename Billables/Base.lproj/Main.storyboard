@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ePL-A4-Vff">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TY2-Id-h6f">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -627,11 +627,61 @@
             </objects>
             <point key="canvasLocation" x="1652" y="-1080"/>
         </scene>
+        <!--Show Splash View Controller-->
+        <scene sceneID="maS-14-yX6">
+            <objects>
+                <viewController id="TY2-Id-h6f" customClass="ShowSplashViewController" customModule="Billables" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZUf-2s-6h5"/>
+                        <viewControllerLayoutGuide type="bottom" id="meA-cM-2FT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pSt-Eb-6ed">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="p03-Sw-cQJ">
+                                <rect key="frame" x="0.0" y="244" width="600" height="101"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billables" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wky-Ra-bbB">
+                                        <rect key="frame" x="268" y="0.0" width="64" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By:  Ted Prekop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsh-IE-dCW">
+                                        <rect key="frame" x="253" y="41" width="95" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashImage" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Si-4Wc">
+                                        <rect key="frame" x="288" y="77" width="24" height="24"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="meA-cM-2FT" firstAttribute="top" secondItem="p03-Sw-cQJ" secondAttribute="bottom" constant="255" id="0zG-m4-mMO"/>
+                            <constraint firstItem="p03-Sw-cQJ" firstAttribute="top" secondItem="ZUf-2s-6h5" secondAttribute="bottom" constant="224" id="B6l-Lg-Hui"/>
+                            <constraint firstAttribute="trailing" secondItem="p03-Sw-cQJ" secondAttribute="trailing" id="MA8-0Z-Tgq"/>
+                            <constraint firstItem="p03-Sw-cQJ" firstAttribute="leading" secondItem="pSt-Eb-6ed" secondAttribute="leading" id="TXk-U5-Lhg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="ePL-A4-Vff" kind="show" identifier="showSplash" id="tvX-HW-LtT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7DX-UQ-mJv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1301" y="106"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Billings" width="25" height="25"/>
         <image name="Stats" width="25" height="25"/>
         <image name="defaultImage" width="540" height="540"/>
+        <image name="splashImage" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9FN-GJ-P0g"/>

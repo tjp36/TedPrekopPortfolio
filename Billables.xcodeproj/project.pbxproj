@@ -16,6 +16,7 @@
 		6A373F341D5C0886000F6EE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A373F331D5C0886000F6EE2 /* Assets.xcassets */; };
 		6A373F371D5C0886000F6EE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A373F351D5C0886000F6EE2 /* LaunchScreen.storyboard */; };
 		6A373F421D5C0886000F6EE2 /* BillablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A373F411D5C0886000F6EE2 /* BillablesTests.swift */; };
+		6A3A44A81D721DB900BF08C6 /* ShowSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A44A71D721DB900BF08C6 /* ShowSplashViewController.swift */; };
 		6A7CB4711D6CE4D6009B7049 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CB4701D6CE4D6009B7049 /* ChartViewController.swift */; };
 		6AB8D0EB1D68E6EC0039FA25 /* TimerSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB8D0EA1D68E6EC0039FA25 /* TimerSingleton.swift */; };
 		6ADBA5611D63817000482BB2 /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBA5601D63817000482BB2 /* ClientTableViewCell.swift */; };
@@ -57,6 +58,7 @@
 		6A373F3D1D5C0886000F6EE2 /* BillablesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillablesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A373F411D5C0886000F6EE2 /* BillablesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillablesTests.swift; sourceTree = "<group>"; };
 		6A373F431D5C0886000F6EE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A3A44A71D721DB900BF08C6 /* ShowSplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowSplashViewController.swift; sourceTree = "<group>"; };
 		6A7CB4701D6CE4D6009B7049 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		6AB8D0EA1D68E6EC0039FA25 /* TimerSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerSingleton.swift; sourceTree = "<group>"; };
 		6ADBA5601D63817000482BB2 /* ClientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				6ADBA5661D6383BC00482BB2 /* ClientTableViewController.swift */,
 				6A7CB4701D6CE4D6009B7049 /* ChartViewController.swift */,
 				6ADBA5681D63841000482BB2 /* MatterTableViewController.swift */,
+				6A3A44A71D721DB900BF08C6 /* ShowSplashViewController.swift */,
 				6ADBA5601D63817000482BB2 /* ClientTableViewCell.swift */,
 				6AB8D0EA1D68E6EC0039FA25 /* TimerSingleton.swift */,
 				6ADBA5621D63818B00482BB2 /* MatterTableViewCell.swift */,
@@ -366,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A3A44A81D721DB900BF08C6 /* ShowSplashViewController.swift in Sources */,
 				6A2744D11D60D94600648092 /* Matter.swift in Sources */,
 				6ADBA56B1D63977400482BB2 /* SettingsViewController.swift in Sources */,
 				6ADBA5611D63817000482BB2 /* ClientTableViewCell.swift in Sources */,
