@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -17,6 +18,7 @@
                     <connections>
                         <segue destination="uRI-KY-cvK" kind="relationship" relationship="viewControllers" id="kXA-vh-Hgr"/>
                         <segue destination="Zki-OO-sHv" kind="relationship" relationship="viewControllers" id="cmH-bz-4Yw"/>
+                        <segue destination="4lt-3r-VhQ" kind="relationship" relationship="viewControllers" id="K2q-3Z-cJU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A9M-oR-fdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6Z-3N-eeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="442"/>
+            <point key="canvasLocation" x="1777" y="442"/>
         </scene>
         <!--Client-->
         <scene sceneID="BQX-Uv-zWx">
@@ -349,6 +351,40 @@
             </objects>
             <point key="canvasLocation" x="2440" y="-238"/>
         </scene>
+        <!--Usage Instructions-->
+        <scene sceneID="uSQ-dE-CdL">
+            <objects>
+                <viewController id="4ZK-jE-vOn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KNo-oh-dBf"/>
+                        <viewControllerLayoutGuide type="bottom" id="2qK-K2-1WU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ujf-Bd-Cvf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-TV-vEB">
+                                <rect key="frame" x="35" y="134" width="530" height="347"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Instructions:  From the Main Tab "Billings," tap the top left Settings button and input user settings, then click save.  From the "Billings" tab, add a client by tapping the top right button.  Tap a client cell to view client matters.  To add a matter, click the top right button.  Tap start and start working.  When you are done, tap stop.  The time will stop and calculate your time.  You can also manually adjust the time as well.  Tap the "Enter Description Here" field to input a description of the task.  Tap the Email button to send an email with the task details to the email address designated in Settings.  Tap save to save the matter to the device.  Tap on the stats tab to see a graph of the time spent on billings over the past week.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="D3I-TV-vEB" firstAttribute="leading" secondItem="ujf-Bd-Cvf" secondAttribute="leadingMargin" constant="15" id="YZK-Vu-VaA"/>
+                            <constraint firstItem="2qK-K2-1WU" firstAttribute="top" secondItem="D3I-TV-vEB" secondAttribute="bottom" constant="70" id="d4c-CO-hVX"/>
+                            <constraint firstItem="D3I-TV-vEB" firstAttribute="top" secondItem="KNo-oh-dBf" secondAttribute="bottom" constant="70" id="ev8-OW-37d"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="D3I-TV-vEB" secondAttribute="trailing" constant="15" id="fgA-8L-Geo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Usage Instructions" id="Frg-Wm-4CH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W3K-FR-EPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="318" y="987"/>
+        </scene>
         <!--Stats-->
         <scene sceneID="9kf-S8-Ijh">
             <objects>
@@ -366,7 +402,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ke-KM-r5u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="220" y="423"/>
+            <point key="canvasLocation" x="1032" y="423"/>
         </scene>
         <!--Add Client-->
         <scene sceneID="fOE-LF-hXz">
@@ -607,7 +643,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBa-dl-yqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3176" y="442"/>
+            <point key="canvasLocation" x="3988" y="442"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ujz-dg-U6D">
@@ -676,11 +712,31 @@
             </objects>
             <point key="canvasLocation" x="-1301" y="106"/>
         </scene>
+        <!--Instructions-->
+        <scene sceneID="9vD-BT-jw5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4lt-3r-VhQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Instructions" image="instructionImage" id="f4Z-35-kuF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TCa-vW-lnY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4ZK-jE-vOn" kind="relationship" relationship="rootViewController" id="SNJ-kL-4qn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="19w-gC-lSh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-494" y="987"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Billings" width="25" height="25"/>
         <image name="Stats" width="25" height="25"/>
         <image name="defaultImage" width="540" height="540"/>
+        <image name="instructionImage" width="24" height="24"/>
         <image name="splashImage" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -81,6 +81,7 @@ class AddClientViewController: UIViewController, UITextFieldDelegate, UIImagePic
             
             /// Set the client to be passed to ClientTableViewController after the unwind segue.
             client = Client(name: name, photo: photo, matters: matters)
+            print(client)
         }
     }
  

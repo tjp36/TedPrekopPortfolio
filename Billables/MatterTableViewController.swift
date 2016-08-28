@@ -104,12 +104,15 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
                 //Set the matter and client of the MatterDetailViewController
                 matterDetailViewController.matter = selectedMatter
                 matterDetailViewController.client = client!
+                print(matterDetailViewController.matter)
+                print(matterDetailViewController.client)
             }
         }
         else if segue.identifier == "addMatter" {
             //Set the matter and client of the MatterDetailViewController
             let matterDetailViewController = (segue.destinationViewController as! UINavigationController).topViewController as! MatterDetailViewController
             matterDetailViewController.client = self.client
+            print(matterDetailViewController.client)
         }
     }
     

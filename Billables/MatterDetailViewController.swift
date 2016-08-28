@@ -107,6 +107,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             
             //Create a new matter from the values in the fields of the TextFields and the User settings
             matter = Matter(client: self.client!, desc: desc, time: time!, price: price, date: date)
+            print(matter)
         }
     }
 

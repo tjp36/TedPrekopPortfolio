@@ -92,6 +92,7 @@ class ChartViewController: UIViewController {
         
         //The array needs to be reversed so that the most recent day appears on the right side of the graph
         pastSevenDays = pastSevenDays.reverse()
+        print(pastSevenDays)
     }
     
     //This function determines the amount of time spent in the past seven days and the color of the bars on the graph
@@ -119,6 +120,7 @@ class ChartViewController: UIViewController {
         }
         //The array needs to be reversed so that the most recent day appears on the right
         timePerDay = timePerDay.reverse()
+        print(timePerDay)
         
         //Determine the color of each bar
         for (index,time) in timePerDay.enumerate(){
@@ -132,6 +134,7 @@ class ChartViewController: UIViewController {
                 colors[index] = (NSUIColor.greenColor())
             }
         }
+        print(colors)
     }
     
     func loadClients() -> [Client]? {

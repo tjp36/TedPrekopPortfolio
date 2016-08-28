@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Increment launchNumber on each launch.  When launchNumber is 5, ClientTableViewController will launch an alert
         var launchNumber = NSUserDefaults.standardUserDefaults().integerForKey("HasLaunchedFiveTimes")
         launchNumber += 1
+        print(launchNumber)
         NSUserDefaults.standardUserDefaults().setInteger(launchNumber, forKey: "HasLaunchedFiveTimes")
         
         return true

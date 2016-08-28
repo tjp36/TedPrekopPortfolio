@@ -67,6 +67,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         User.sharedInstance.rate = Double(billableRate.text!)
         
         User.sharedInstance.saveValues()
+        print(User.sharedInstance.firstName)
+        print(User.sharedInstance.lastName)
+        print(User.sharedInstance.email)
+        print(User.sharedInstance.phoneNumber)
+        print(User.sharedInstance.rate)
         
         dismissViewControllerAnimated(true, completion: nil)
     }

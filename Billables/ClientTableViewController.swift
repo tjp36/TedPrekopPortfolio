@@ -107,6 +107,7 @@ class ClientTableViewController: UITableViewController {
                 
                 let indexPath = tableView.indexPathForCell(selectedClientCell)
                 let selectedClient = clients[indexPath!.row]
+                print(selectedClient)
                 
                 //Set the client equal to the client represented in the selected cell
                 matterTableViewController.navLabel.title = selectedClient.name
@@ -145,6 +146,7 @@ class ClientTableViewController: UITableViewController {
     func saveClients(){
         /// Code to save clients so that same clients are there when we restart app
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(clients, toFile: Client.ArchiveURL.path!)
+        print(Client.ArchiveURL.path!)
         if !isSuccessfulSave {
             print("Failed to save clients...")
         }
