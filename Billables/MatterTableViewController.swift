@@ -10,7 +10,7 @@
 
 import UIKit
 
-class MatterTableViewController: UITableViewController, UINavigationControllerDelegate {
+class MatterTableViewController: UITableViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     //MARK: - Properties
     @IBOutlet weak var navLabel: UINavigationItem!
@@ -18,6 +18,12 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MatterTableViewController.handleLongPress(_:)))
+        lpgr.minimumPressDuration = 5.0
+        lpgr.delegate = self
+        lpgr.delaysTouchesBegan = true
+        self.tableView.addGestureRecognizer(lpgr)
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,42 +56,20 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
     
         return cell
     }
- 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
+    
+    func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
+        if (gestureRecognizer.state != UIGestureRecognizerState.Ended){
+            return
+        }
+        
+        let touchPoint = gestureRecognizer.locationInView(self.view)
+        if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
+            client!.matters.removeAtIndex(indexPath.row)
+            saveMatters()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Action
     @IBAction func back(sender: UIBarButtonItem) {

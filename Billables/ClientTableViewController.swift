@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClientTableViewController: UITableViewController {
+class ClientTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
     // MARK: Properties
     var clients = [Client]()
@@ -29,6 +29,12 @@ class ClientTableViewController: UITableViewController {
             /// Load the sample data.
             loadSampleClients()
         }
+        
+        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ClientTableViewController.handleLongPress(_:)))
+        lpgr.minimumPressDuration = 5.0
+        lpgr.delegate = self
+        lpgr.delaysTouchesBegan = true
+        self.tableView.addGestureRecognizer(lpgr)
 
     }
     
@@ -78,14 +84,6 @@ class ClientTableViewController: UITableViewController {
         return cell
     }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
      // Override to support editing the table view.
      override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
@@ -117,6 +115,20 @@ class ClientTableViewController: UITableViewController {
         }
     }
     
+    func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
+        if (gestureRecognizer.state != UIGestureRecognizerState.Ended){
+            return
+        }
+        
+        let touchPoint = gestureRecognizer.locationInView(self.view)
+        if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
+            clients.removeAtIndex(indexPath.row)
+            saveClients()
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+
+    }
+    
     //After returning from the AddClientViewController, append the new client to clients array and save
     @IBAction func unwindToClientList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? AddClientViewController, client = sourceViewController.client {
@@ -127,7 +139,7 @@ class ClientTableViewController: UITableViewController {
         }
     }
     
-    //Alert controller to be displayed upon the 5th launch of the application
+    //Alert controller to be displayed upon the 5th launch of the application.  Note that this is dummy code (doesn't actually do anything) as app is not currently in the app store
     func showRatingAlert(){
         let alert = UIAlertController(title: "Rate Me", message: "Thanks for using Billables", preferredStyle: UIAlertControllerStyle.Alert)
 
