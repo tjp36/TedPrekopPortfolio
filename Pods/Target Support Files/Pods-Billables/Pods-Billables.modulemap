@@ -1,0 +1,6 @@
+framework module Pods_Billables {
+  umbrella header "Pods-Billables-umbrella.h"
+
+  export *
+  module * { export * }
+}
