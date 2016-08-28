@@ -149,6 +149,18 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             return
         }
         
+        if(matter == nil){
+            let alert = UIAlertController(title: "Matter Not Yet Saved", message: "Please save this matter before emailing", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { alertAction in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
         //Check to see if mail can be sent.  If yes, send an email with the pertinent matter details
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
@@ -158,7 +170,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             mail.setMessageBody("Client:  \(matter!.client!.name!)\n" +
                                 "Description:  \(matter!.desc!)\n" +
                                 "Time:  \(matter!.time!)\n" +
-                                "Price:  $\(matter!.price!)", isHTML: false)
+                "Price:  $" + String(format:"%.2f", matter!.price!), isHTML: false)
             
             presentViewController(mail, animated: true, completion: nil)
         } else {
