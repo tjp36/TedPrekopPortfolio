@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var launchNumber = NSUserDefaults.standardUserDefaults().integerForKey("HasLaunchedFiveTimes")
         launchNumber += 1
         print(launchNumber)
+        if launchNumber == 1 {
+            let launchDate = NSDate().description
+            NSUserDefaults.standardUserDefaults().setObject(launchDate, forKey: "launch_date")
+        }
         NSUserDefaults.standardUserDefaults().setInteger(launchNumber, forKey: "HasLaunchedFiveTimes")
         
         return true
