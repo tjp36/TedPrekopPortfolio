@@ -115,6 +115,7 @@ class ClientTableViewController: UITableViewController, UIGestureRecognizerDeleg
         }
     }
     
+    //Long press gesture recognizer to handle deletions
     func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
         if (gestureRecognizer.state != UIGestureRecognizerState.Ended){
             return
@@ -122,11 +123,27 @@ class ClientTableViewController: UITableViewController, UIGestureRecognizerDeleg
         
         let touchPoint = gestureRecognizer.locationInView(self.view)
         if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
-            clients.removeAtIndex(indexPath.row)
-            saveClients()
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            confirmDelete(indexPath)
         }
 
+    }
+    
+    //Alert Controller to handle deletions
+    func confirmDelete(indexPath: NSIndexPath){
+        let alert = UIAlertController(title: "Confirm Delete", message: "Are you sure you want to delete this client?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default, handler: { alertAction in
+            self.clients.removeAtIndex(indexPath.row)
+            self.saveClients()
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: { alertAction in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     //After returning from the AddClientViewController, append the new client to clients array and save

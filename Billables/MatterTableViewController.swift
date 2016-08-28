@@ -57,6 +57,7 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         return cell
     }
     
+    //Long press gesture recognizer to handle deletions
     func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
         if (gestureRecognizer.state != UIGestureRecognizerState.Ended){
             return
@@ -64,11 +65,27 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
         
         let touchPoint = gestureRecognizer.locationInView(self.view)
         if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
-            client!.matters.removeAtIndex(indexPath.row)
-            saveMatters()
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            confirmDelete(indexPath)
         }
         
+    }
+    
+    //Alert Controller to handle deletions
+    func confirmDelete(indexPath: NSIndexPath){
+        let alert = UIAlertController(title: "Confirm Delete", message: "Are you sure you want to delete this matter?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default, handler: { alertAction in
+            self.client!.matters.removeAtIndex(indexPath.row)
+            self.saveMatters()
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: { alertAction in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     // MARK: - Action
