@@ -366,7 +366,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-TV-vEB">
                                 <rect key="frame" x="35" y="134" width="530" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Instructions:  From the Main Tab "Billings," tap the top left Settings button and input user settings, then click save.  From the "Billings" tab, add a client by tapping the top right button.  Tap a client cell to view client matters.  To add a matter, click the top right button.  Tap start and start working.  When you are done, tap stop.  The time will stop and calculate your time.  You can also manually adjust the time as well.  Tap the "Enter Description Here" field to input a description of the task.  Tap the Email button to send an email with the task details to the email address designated in Settings.  Tap save to save the matter to the device.  Tap on the stats tab to see a graph of the time spent on billings over the past week.</mutableString>
+                                <string key="text">Instructions:  From the Main Tab "Billings," tap the top left Settings button and input user settings, then click save.  From the "Billings" tab, add a client by tapping the top right button.  Tap a client cell to view client matters.  To add a matter, click the top right button.  Tap start and start working.  When you are done, tap stop.  The time will stop and calculate your time.  You can also manually adjust the time as well.  Tap the "Enter Description Here" field to input a description of the task.  Tap the Email button to send an email with the task details to the email address designated in Settings.  Tap save to save the matter to the device.  Tap on the stats tab to see a graph of the time spent on billings over the past week.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -531,14 +531,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="200" translatesAutoresizingMaskIntoConstraints="NO" id="16N-De-tjI">
                                         <rect key="frame" x="167" y="21" width="266" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmB-Y5-pBC">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmB-Y5-pBC">
                                                 <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
                                                 <state key="normal" title="Start"/>
                                                 <connections>
                                                     <action selector="startTimer:" destination="wX2-gO-i7D" eventType="touchUpInside" id="vVP-YY-HSd"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQt-vA-geG">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQt-vA-geG">
                                                 <rect key="frame" x="234" y="0.0" width="32" height="30"/>
                                                 <state key="normal" title="Stop"/>
                                                 <connections>

@@ -60,6 +60,9 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             navigationItem.title = matter.client?.name
             descriptionTextField.text = matter.desc
         }
+        
+        let btnTempStop = self.view.viewWithTag(2) as! UIButton;
+        btnTempStop.enabled = false;
     
     }
     
@@ -84,6 +87,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        timerLabelDecimal.text = timeField.text!
         timeField.resignFirstResponder()
     }
     
@@ -115,6 +119,10 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     //Function to be called when the Start button is pressed.  Starts a timer and disables save button
     @IBAction func startTimer(sender: AnyObject) {
+        let btnTemp = self.view.viewWithTag(1) as! UIButton;
+        btnTemp.enabled = false;
+        let btnTempStop = self.view.viewWithTag(2) as! UIButton;
+        btnTempStop.enabled = true;
         TimerSingleton.sharedInstance.start()
         saveButton.enabled = false
     }
@@ -130,6 +138,10 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         timerLabelDecimal.text = "\(totalTime) hours"
         timeField.text = String(totalTime)
         saveButton.enabled = true
+        let btnTemp = self.view.viewWithTag(1) as! UIButton;
+        btnTemp.enabled = true;
+        let btnTempStop = self.view.viewWithTag(2) as! UIButton;
+        btnTempStop.enabled = false;
     }
     
     //Sends an email with the matter details to an email address saved in Settings
