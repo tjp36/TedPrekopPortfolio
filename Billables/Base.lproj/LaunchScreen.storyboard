@@ -8,6 +8,7 @@
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
@@ -18,18 +19,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MLg-Mb-CVD">
-                                <rect key="frame" x="0.0" y="249" width="600" height="101"/>
+                                <rect key="frame" x="0.0" y="244" width="600" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billables" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uo0-Sh-toY">
                                         <rect key="frame" x="268" y="0.0" width="64" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By:  Ted Prekop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BK-CI-f6o">
                                         <rect key="frame" x="253" y="41" width="95" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashImage" translatesAutoresizingMaskIntoConstraints="NO" id="F9T-UJ-p7N">
@@ -40,16 +41,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="MLg-Mb-CVD" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="229" id="0ZC-Zu-beM"/>
-                            <constraint firstAttribute="trailing" secondItem="MLg-Mb-CVD" secondAttribute="trailing" id="J4a-2Y-DqG"/>
-                            <constraint firstItem="MLg-Mb-CVD" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="VVM-DN-1Ac"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="MLg-Mb-CVD" secondAttribute="bottom" constant="250" id="nhD-Tj-8Hb"/>
+                            <constraint firstItem="MLg-Mb-CVD" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="224" id="UfC-70-2k8"/>
+                            <constraint firstAttribute="trailing" secondItem="MLg-Mb-CVD" secondAttribute="trailing" id="X1C-kh-nW5"/>
+                            <constraint firstItem="MLg-Mb-CVD" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="zmG-sc-egc"/>
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="-2627" y="-617"/>
         </scene>
     </scenes>
     <resources>

@@ -59,6 +59,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         if let matter = matter{
             navigationItem.title = matter.client?.name
             descriptionTextField.text = matter.desc
+            timeField.text = String(matter.time!)
         }
         
         let btnTempStop = self.view.viewWithTag(2) as! UIButton;
@@ -66,9 +67,6 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     }
     
-    override func viewWillAppear(animated: Bool) {
-        
-    }
     
     //Remove observer when needed
     deinit {
@@ -96,22 +94,36 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     //Function called upon pressing save
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //Check to Make sure timer has been started
+        
+        
         if(saveButton === sender){
             
+            
             let desc = descriptionTextField.text ?? ""
+            
             
             //Round up to prevent saving tasks with 0 time
             if(totalTime <= 0){
                 totalTime = 0.1
             }
             
+            print(timeField.text)
+            if(timeField.text == nil || timeField.text == ""){
+                timeField.text = "0.0"
+            }
+           
             let time = Double(timeField.text!)
+            
             let price = (User.sharedInstance.rate! * time!).roundToPlaces(2)
+            
             let date = datePicker.date
+            
+           
             
             //Create a new matter from the values in the fields of the TextFields and the User settings
             matter = Matter(client: self.client!, desc: desc, time: time!, price: price, date: date)
-            print(matter)
+            
         }
     }
 
@@ -240,7 +252,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             }
         }
         
-        //Update the lables
+        //Update the labels
         timerLabelHour.text = "\(counterHour):"
         timerLabelMinute.text = "\(counterMinute):"
         timerLabelSecond.text = "\(counterSecond)"
