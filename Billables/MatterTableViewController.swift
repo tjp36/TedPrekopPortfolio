@@ -105,6 +105,7 @@ class MatterTableViewController: UITableViewController, UINavigationControllerDe
                 //Set the matter and client of the MatterDetailViewController
                 matterDetailViewController.matter = selectedMatter
                 matterDetailViewController.client = client!
+                
                 print(matterDetailViewController.matter)
                 print(matterDetailViewController.client)
             }

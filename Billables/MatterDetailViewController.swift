@@ -61,6 +61,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
             navigationItem.title = matter.client?.name
             descriptionTextField.text = matter.desc
             timeField.text = String(matter.time!)
+            datePicker.date = matter.date!
         }
         
         let btnTempStop = self.view.viewWithTag(2) as! UIButton;
