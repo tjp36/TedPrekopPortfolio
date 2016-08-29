@@ -42,6 +42,10 @@ class TimerSingleton{
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
     
+    func checkReturnStatus() -> Bool{
+        return NSUserDefaults.standardUserDefaults().boolForKey("isTimerRunning")
+    }
+    
     //Increments the counter and updates the label in MatterDetailViewController using the delegate object
     @objc func timerAction(){
         counter += 1

@@ -34,7 +34,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("in viewDidLoad")
         //Load the User settings for later use
         User.sharedInstance.loadValues()
         
@@ -46,9 +46,10 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatterDetailViewController.appReturnedFromBackground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
        
         //Set the timer values
-        timerLabelHour.text = "\(counterHour):"
-        timerLabelMinute.text = "\(counterMinute):"
-        timerLabelSecond.text = "\(counterSecond)"
+            timerLabelHour.text = "\(counterHour):"
+            timerLabelMinute.text = "\(counterMinute):"
+            timerLabelSecond.text = "\(counterSecond)"
+        
         
         //Set up delegates
         descriptionTextField.delegate = self
@@ -67,6 +68,15 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        print("in view will appear")
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        print("in viewDidAppear")
+    }
     
     //Remove observer when needed
     deinit {
@@ -135,6 +145,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         btnTemp.enabled = false;
         let btnTempStop = self.view.viewWithTag(2) as! UIButton;
         btnTempStop.enabled = true;
+        
         TimerSingleton.sharedInstance.start()
         saveButton.enabled = false
     }
@@ -154,6 +165,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         btnTemp.enabled = true;
         let btnTempStop = self.view.viewWithTag(2) as! UIButton;
         btnTempStop.enabled = false;
+        
     }
     
     //Sends an email with the matter details to an email address saved in Settings
@@ -209,6 +221,18 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     @IBAction func cancel(sender: AnyObject) {
         /// Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        if(saveButton.enabled == false){
+            let alert = UIAlertController(title: "Timer Not Stopped", message: "Please stop the timer before cancelling", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { alertAction in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
         let isPresentingInAddMatterMode = presentingViewController is UINavigationController
         
         if isPresentingInAddMatterMode {
@@ -226,7 +250,7 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
     
     //Called by NSNotificationCenter whennever app returns from background
     func appReturnedFromBackground(notification:NSNotification){
-        
+        print("appReturnedFromBackground")
         //Get the total elapsed time since the Start button was pressed (in seconds)
         let defaults = NSUserDefaults.standardUserDefaults()
         let now = defaults.objectForKey("StartDate") as! NSDate
@@ -245,12 +269,15 @@ class MatterDetailViewController: UIViewController, UINavigationControllerDelega
         }
         
         //Subtract 60 seconds from the counterSecond until we have a value that can "fit" into the counterSecond label
+        counterSecond = currentTime
         while(counterSecond >= 60){
             counterSecond -= 60
             if(counterSecond < 0){
                 counterSecond += 60
             }
         }
+        
+        print("counterSecond is \(counterSecond)")
         
         //Update the labels
         timerLabelHour.text = "\(counterHour):"

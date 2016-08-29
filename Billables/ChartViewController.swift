@@ -110,10 +110,11 @@ class ChartViewController: UIViewController {
         //Iterate through each client and each matter.  If the matter is within the given time period,
         for client in clients{
             for matter in client.matters{
-                
+                print(matter.date)
                 //Boolean test to see if date is within the last week.  If it is, translate the date to one of the seven dates on the x-Axis and increment the entry at that index
                 if(matter.date!.isBetweeen(date: lastWeek!, andDate: today)){
                     let index = NSCalendar.currentCalendar().components(.Day, fromDate: matter.date!, toDate: today, options: []).day
+                    print(index)
                     timePerDay[index] += matter.time!
                 }
             }

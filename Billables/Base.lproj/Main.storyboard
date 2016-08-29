@@ -601,7 +601,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Matter" id="q5A-Gh-49m">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8e8-87-pne">
+                        <barButtonItem key="leftBarButtonItem" tag="3" systemItem="cancel" id="8e8-87-pne">
                             <connections>
                                 <action selector="cancel:" destination="wX2-gO-i7D" id="Fhh-bX-gdn"/>
                             </connections>
@@ -685,7 +685,6 @@
         <!--Show Splash View Controller-->
         <scene sceneID="ruv-E2-tR4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i7i-6w-P0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="cUD-fW-Eas" customClass="ShowSplashViewController" customModule="Billables" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tDq-mr-KEg"/>
@@ -727,6 +726,7 @@
                         <segue destination="ePL-A4-Vff" kind="show" identifier="showSplash" id="Fj8-Zz-ZUU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i7i-6w-P0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1391" y="93"/>
         </scene>
